@@ -1,6 +1,8 @@
 ## Welcome to uBlobeBM (BlobeBM uBlock Edition)!
 uBlobeBM is an HTML program that runs bookmarklets using uBlock origin. It's very useful if bookmarklets don't work on your device or if they are blocked by your administrator.
-#### How to use BlobeBM
+#### How to use uBlobeBM
+Press CTRL + Shift + ~
+
 Where it says "Enter bookmarklet here", enter the bookmarklet code. Then click on the green "Add Bookmarklet" button.
 
 It will prompt you for how you want it to be called. Name it something that makes sense, because once you have a long list of bookmarklets, you want it to be easy to tell which one's which.
