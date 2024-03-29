@@ -10,6 +10,11 @@ Check the "I am an advanced user" box, then click on the small gear ⚙️ icon.
 
 Go to chrome-extension://cjpalhdlnbpafiamejdnhcphjbkeiagm/1p-filters.html
 
+Add the following line:
+```
+*##+js(blob.js)
+```
+
 Make sure that you have uBlock origin installed on your computer. If you dont, download it [here](https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm).
 
 #### How to use uBlobeBM
