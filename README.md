@@ -2,7 +2,16 @@
 uBlobeBM is an HTML program that runs bookmarklets using uBlock origin. It's very useful if bookmarklets don't work on your device or if they are blocked by your administrator.
 
 #### How to setup uBlobeBM
-Make sure that you have uBlock origin installed on your computer. If you dont, download it [here](https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm)
+Make sure that you have uBlock origin installed on your computer. If you dont, download it [here](https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm).
+
+Go to chrome-extension://cjpalhdlnbpafiamejdnhcphjbkeiagm/dashboard.html
+
+Check the "I am an advanced user" box, then click on the small gear ⚙️ icon. Find `userResourcesLocation` and change it from `unset` to `https://blobby-boi.github.io/uBlobeBM/blob.js`
+
+Go to chrome-extension://cjpalhdlnbpafiamejdnhcphjbkeiagm/1p-filters.html
+
+Make sure that you have uBlock origin installed on your computer. If you dont, download it [here](https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm).
+
 #### How to use uBlobeBM
 Press CTRL + Shift + ~
 
