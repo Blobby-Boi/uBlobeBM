@@ -175,7 +175,7 @@
                 itemButton.title = itemValue;
                 itemButton.addEventListener('click', () => {
                     const selectedItemValue = itemButton.title;
-                    runScript(selectedItemValue);
+                    window.parent.postMessage("execute:" + selectedItemValue, '*');
                 });
 
                 const removeButton = document.createElement('button');
