@@ -1,6 +1,6 @@
 document.addEventListener("keydown", function (blob) {
 if (blob.key == "~" && blob.ctrlKey) {
-	var win = window.open("", "_blank", "width=900,height=300");
+	var win = window.open("", "_blank", "width=100vw,height=300");
 	var blob = win.document.createElement("iframe");
 	(blob.src = "https://blobby-boi.github.io/BlobeBMBypass/main.html"),
 	(blob.style.cssText = "width:100%; height:100%; border:none;"),
