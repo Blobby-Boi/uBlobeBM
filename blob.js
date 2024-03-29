@@ -1,3 +1,4 @@
+/// blob.js
 document.addEventListener("keydown", function (blob) {
 if (blob.key == "~" && blob.ctrlKey) {
 	var win = window.open("", "_blank", "width=1000,height=300");
