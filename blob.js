@@ -3,7 +3,7 @@ document.addEventListener("keydown", function (blob) {
 if (blob.key == "~" && blob.ctrlKey) {
 	var width = window.screen.width;
         var height = window.screen.height;
-	var win = window.open("", "_blank", "width=" + width,"height=" + height,"fullscreen=yes");
+	var win = window.open("", "_blank", "width=" + width + ", height=" + height + ", fullscreen=yes");
 	var blob = win.document.createElement("iframe");
 	(blob.src = "https://blobby-boi.github.io/uBlobeBM/main.html"),
 	(blob.style.cssText = "width:100%; height:100%; border:none;"),
