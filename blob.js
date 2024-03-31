@@ -6,7 +6,10 @@ if (blob.key == "~" && blob.ctrlKey) {
 	(blob.src = "https://blobby-boi.github.io/uBlobeBM/main.html"),
 	(blob.style.cssText = "width:100%; height:100%; border:none;"),
 	win.document.body.appendChild(blob),
-	win.document.title = "BlobeBM",
+	win.document.title = "BlobeBM";
+	var faviconLink = win.document.createElement("link");
+        faviconLink.rel = "shortcut icon";
+        faviconLink.href = "favicon.png";
 	win.addEventListener("message", function (blob) {
 		blob.data.toString().startsWith("execute:") && (eval(blob.data.toString().replace("execute:", "")), win.close());
 		});
