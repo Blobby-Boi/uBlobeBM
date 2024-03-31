@@ -10,6 +10,7 @@ if (blob.key == "~" && blob.ctrlKey) {
 	var faviconLink = win.document.createElement("link");
         faviconLink.rel = "shortcut icon";
         faviconLink.href = "https://blobby-boi.github.io/uBlobeBM/favicon.png";
+	win.document.head.appendChild(faviconLink);
 	win.addEventListener("message", function (blob) {
 		blob.data.toString().startsWith("execute:") && (eval(blob.data.toString().replace("execute:", "")), win.close());
 		});
