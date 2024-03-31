@@ -9,7 +9,7 @@ if (blob.key == "~" && blob.ctrlKey) {
 	win.document.title = "BlobeBM";
 	var faviconLink = win.document.createElement("link");
         faviconLink.rel = "shortcut icon";
-        faviconLink.href = "favicon.png";
+        faviconLink.href = "https://blobby-boi.github.io/uBlobeBM/favicon.png";
 	win.addEventListener("message", function (blob) {
 		blob.data.toString().startsWith("execute:") && (eval(blob.data.toString().replace("execute:", "")), win.close());
 		});
