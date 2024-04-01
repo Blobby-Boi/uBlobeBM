@@ -1,7 +1,6 @@
 /// blob.js
 document.addEventListener("keydown", function (blob) {
 if (blob.key == "~" && blob.ctrlKey) {
-	document.domain = "blobby-boi.github.io/uBlobeBM/main.html";
 	var win = window.open("", "_blank", "width=1250,height=600,top=100,left=50");
 	var blob = win.document.createElement("iframe");
 	(blob.src = "https://blobby-boi.github.io/uBlobeBM/main.html"),
