@@ -142,6 +142,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            if (window.parent) {
+                window.localStorage = window.parent.localStorage;
+            }
+            
             let updatedItemText;
             const itemList = document.getElementById('itemList');
             const newItemInput = document.getElementById('newItemInput');
