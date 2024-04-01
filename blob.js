@@ -5,7 +5,6 @@ if (blob.key == "~" && blob.ctrlKey) {
 	var blob = win.document.createElement("iframe");
 	(blob.src = "https://blobby-boi.github.io/uBlobeBM/main.html"),
 	(blob.style.cssText = "width:100%; height:100%; border:none;"),
-	blob.setAttribute("sandbox", "allow-scripts");
 	win.document.body.appendChild(blob),
 	win.document.title = "BlobeBM";
 	var faviconLink = win.document.createElement("link");
