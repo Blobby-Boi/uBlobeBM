@@ -260,16 +260,5 @@
             }
         });
     </script>
-    <script>
-    window.addEventListener("message", function (event) {
-        if (event.data.type === "storeData") {
-            var data = event.data.data;
-
-            // Store the data in iframe's local storage
-            localStorage.setItem('items', JSON.stringify(data.items));
-            // Add more data properties as needed
-        }
-    });
-</script>
 </body>
 </html>
