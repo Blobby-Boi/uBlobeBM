@@ -223,7 +223,6 @@
                     };
                 });
                 localStorage.setItem('items', JSON.stringify(items));
-                window.parent.postMessage({ type: "storeData", data: items }, '*');
             }
 
             function runScript(selectedItemValue) {
