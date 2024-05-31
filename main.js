@@ -48,16 +48,7 @@ document.addEventListener("keydown", function(blob) {
 
         document.body.appendChild(blobFrameContainer);
 
-        window.addEventListener("message", function(message) {
-            if (message.data.toString().startsWith("run:")) {
-                closeWithAnimation(blobFrameContainer);
-                blobFrame = null;
-
-                setTimeout(() => {
-                    eval(message.data.toString().replace("run:", ""));
-                }, 100);
-            }
-        });
+        window.addEventListener("message", handleMessage);
     }
 });
 
@@ -93,6 +84,18 @@ function stopDragging() {
 function closeIframe() {
     closeWithAnimation(blobFrameContainer);
     blobFrame = null;
+    window.removeEventListener("message", handleMessage);
+}
+
+function handleMessage(message) {
+    if (message.data.toString().startsWith("run:")) {
+        closeWithAnimation(blobFrameContainer);
+        blobFrame = null;
+
+        setTimeout(() => {
+            eval(message.data.toString().replace("run:", ""));
+        }, 100);
+    }
 }
 
 function closeWithAnimation(element) {
