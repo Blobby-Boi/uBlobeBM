@@ -65,7 +65,7 @@ function startDragging(e) {
     const rect = blobFrameContainer.getBoundingClientRect();
     offsetX = e.clientX - rect.left;
     offsetY = e.clientY - rect.top;
-    barRect = e.target.getBoundingClientRect();
+    barRect = blobFrameContainer.getBoundingClientRect();
     document.addEventListener("mousemove", drag);
     document.addEventListener("mouseup", stopDragging);
 }
