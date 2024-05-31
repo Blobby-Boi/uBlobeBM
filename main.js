@@ -4,7 +4,6 @@ fontLink.href = "https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&
 document.head.appendChild(fontLink);
 
 let blobFrame = null;
-let isMinimized = false;
 
 document.addEventListener("keydown", function(blob) {
     if (blob.key == "~" && blob.ctrlKey && !blobFrame) {
@@ -20,21 +19,10 @@ document.addEventListener("keydown", function(blob) {
         blobFrame = document.createElement("iframe");
         blobFrame.src = "https://blobby-boi.github.io/uBlobeBM/main.html";
         blobFrame.style.cssText = "width: 100%; height: calc(100% - 30px); border: none; position: absolute; top: 30px; display: block;";
-        
+
         const bar = document.createElement("div");
         bar.style.cssText = "width: 100%; height: 30px; background-color: #4CAF50; position: relative; border-top-left-radius: 8px; border-top-right-radius: 8px; user-select: none;";
-        
-        const minimizeButton = document.createElement("button");
-        minimizeButton.innerText = "—";
-        minimizeButton.style.cssText = "position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: none; border: none; font-size: 16px; color: #fff; cursor: pointer;";
-        minimizeButton.addEventListener("click", toggleMinimize);
-        minimizeButton.addEventListener("mouseenter", function() {
-            minimizeButton.style.backgroundColor = "#357a38";
-        });
-        minimizeButton.addEventListener("mouseleave", function() {
-            minimizeButton.style.backgroundColor = "transparent";
-        });
-        
+
         const closeButton = document.createElement("button");
         closeButton.innerText = "X";
         closeButton.style.cssText = "position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: none; border: none; font-size: 16px; color: #fff; cursor: pointer;";
@@ -50,16 +38,16 @@ document.addEventListener("keydown", function(blob) {
         titleText.innerText = "uBlobeBM";
         titleText.style.cssText = "position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 16px; font-family: 'Varela Round', sans-serif; user-select: none;";
 
-        bar.appendChild(minimizeButton);
         bar.appendChild(titleText);
         bar.appendChild(closeButton);
+
         bar.addEventListener("mousedown", startDragging);
-        
+
         blobFrameContainer.appendChild(blobFrame);
         blobFrameContainer.appendChild(bar);
-        
+
         document.body.appendChild(blobFrameContainer);
-        
+
         window.addEventListener("message", function(message) {
             if (message.data.toString().startsWith("run:")) {
                 closeWithAnimation(blobFrameContainer);
@@ -89,10 +77,10 @@ function startDragging(e) {
 function drag(e) {
     let newX = e.clientX - offsetX;
     let newY = e.clientY - offsetY;
-    
+
     newX = Math.min(Math.max(newX, 0), window.innerWidth - barRect.width);
     newY = Math.min(Math.max(newY, 0), window.innerHeight - barRect.height);
-    
+
     blobFrameContainer.style.left = newX + "px";
     blobFrameContainer.style.top = newY + "px";
 }
@@ -105,18 +93,6 @@ function stopDragging() {
 function closeIframe() {
     closeWithAnimation(blobFrameContainer);
     blobFrame = null;
-}
-
-function toggleMinimize() {
-    if (isMinimized) {
-        blobFrame.style.display = "block";
-        blobFrameContainer.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.2)";
-        isMinimized = false;
-    } else {
-        blobFrame.style.display = "none";
-        blobFrameContainer.style.boxShadow = "none";
-        isMinimized = true;
-    }
 }
 
 function closeWithAnimation(element) {
