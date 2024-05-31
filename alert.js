@@ -1,0 +1,2 @@
+/// alert.js
+alert("hi");
