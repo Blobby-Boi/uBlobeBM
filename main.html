@@ -230,14 +230,15 @@
 
             function runScript(selectedItemValue) {
                 overlay.style.display = 'flex';
-
+		    
                 setTimeout(() => {
                     try {
                        window.parent.postMessage("run:" + decodeURIComponent(selectedItemValue), '*');
                     } catch (error) {
                         console.error('Error executing script:', error);
                         alert('An error occured while executing the bookmarklet. Try double checking the code of the bookmarklet.');
-                    }
+                    	overlay.style.display = 'none';
+		    }
                 }, 500);
             }
 
