@@ -60,11 +60,6 @@ document.addEventListener("keydown", function(blob) {
         
         document.body.appendChild(blobFrameContainer);
         
-        var faviconLink = document.createElement("link");
-        faviconLink.rel = "shortcut icon";
-        faviconLink.href = "https://blobby-boi.github.io/uBlobeBM/favicon.png";
-        document.head.appendChild(faviconLink);
-        
         window.addEventListener("message", function(message) {
             if (message.data.toString().startsWith("run:")) {
                 closeWithAnimation(blobFrameContainer);
