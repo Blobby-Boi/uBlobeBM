@@ -57,6 +57,7 @@ let blobFrameContainer;
 let isDragging = false;
 
 function startDragging(e) {
+    e.stopPropagation();
     const rect = blobFrameContainer.getBoundingClientRect();
     offsetX = e.clientX - rect.left;
     offsetY = e.clientY - rect.top;
@@ -66,6 +67,7 @@ function startDragging(e) {
 }
 
 function drag(e) {
+    e.stopPropagation();
     if (!isDragging) return;
     let newX = e.clientX - offsetX;
     let newY = e.clientY - offsetY;
@@ -78,6 +80,7 @@ function drag(e) {
 }
 
 function stopDragging() {
+    e.stopPropagation();
     isDragging = false;
     document.removeEventListener("mousemove", drag);
     document.removeEventListener("mouseup", stopDragging);
