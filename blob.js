@@ -1,3 +1,4 @@
+/// blob.js
 const fontLink = document.createElement("link");
 fontLink.rel = "stylesheet";
 fontLink.href = "https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap";
