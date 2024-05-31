@@ -27,12 +27,17 @@ document.addEventListener("keydown", function(blob) {
         closeButton.innerText = "X";
         closeButton.style.cssText = "position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: none; border: none; font-size: 16px; color: #fff; cursor: pointer;";
         closeButton.addEventListener("click", closeIframe);
-        closeButton.addEventListener("mouseenter", function() {
-            closeButton.style.backgroundColor = "#357a38";
+
+        const closeButtonCircle = document.createElement("div");
+        closeButtonCircle.style.cssText = "position: absolute; top: 50%; left: 11px; transform: translateY(-50%); margin-left: -15px; width: 30px; height: 30px; border-radius: 50%; background-color: rgba(0, 0, 0, 0); transition: background-color 0.3s;";
+        closeButtonCircle.addEventListener("mouseenter", function() {
+            closeButtonCircle.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
         });
-        closeButton.addEventListener("mouseleave", function() {
-            closeButton.style.backgroundColor = "transparent";
+        closeButtonCircle.addEventListener("mouseleave", function() {
+            closeButtonCircle.style.backgroundColor = "rgba(0, 0, 0, 0)";
         });
+
+        closeButton.appendChild(closeButtonCircle);
 
         const titleText = document.createElement("div");
         titleText.innerText = "uBlobeBM";
