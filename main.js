@@ -25,7 +25,7 @@ document.addEventListener("keydown", function(blob) {
         bar.style.cssText = "width: 100%; height: 30px; background-color: #4CAF50; position: relative; border-top-left-radius: 8px; border-top-right-radius: 8px; user-select: none;";
         
         const minimizeButton = document.createElement("button");
-        minimizeButton.innerText = "-";
+        minimizeButton.innerText = "—";
         minimizeButton.style.cssText = "position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background: none; border: none; font-size: 16px; color: #fff; cursor: pointer;";
         minimizeButton.addEventListener("click", toggleMinimize);
         minimizeButton.addEventListener("mouseenter", function() {
