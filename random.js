@@ -1,13 +1,6 @@
-const fontLink = document.createElement("link");
-fontLink.rel = "stylesheet";
-fontLink.href = "https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap";
-document.head.appendChild(fontLink);
-
-let blobFrame = null;
-let isMinimized = false;
-
 document.addEventListener("keydown", function(blob) {
-    if (blob.key == "~" && blob.ctrlKey && !blobFrame) {
+    if (blob.key == "~" && blob.ctrlKey) {
+        alert("hi");
         if (blobFrame) {
             closeWithAnimation(blobFrameContainer);
             blobFrame = null;
@@ -77,58 +70,3 @@ document.addEventListener("keydown", function(blob) {
         });
     }
 });
-
-let offsetX, offsetY;
-let blobFrameContainer;
-let barRect;
-
-function startDragging(e) {
-    const rect = blobFrameContainer.getBoundingClientRect();
-    offsetX = e.clientX - rect.left;
-    offsetY = e.clientY - rect.top;
-    barRect = e.target.getBoundingClientRect();
-    document.addEventListener("mousemove", drag);
-    document.addEventListener("mouseup", stopDragging);
-}
-
-function drag(e) {
-    let newX = e.clientX - offsetX;
-    let newY = e.clientY - offsetY;
-    
-    newX = Math.min(Math.max(newX, 0), window.innerWidth - barRect.width);
-    newY = Math.min(Math.max(newY, 0), window.innerHeight - barRect.height);
-    
-    blobFrameContainer.style.left = newX + "px";
-    blobFrameContainer.style.top = newY + "px";
-}
-
-function stopDragging() {
-    document.removeEventListener("mousemove", drag);
-    document.removeEventListener("mouseup", stopDragging);
-}
-
-function closeIframe() {
-    closeWithAnimation(blobFrameContainer);
-    blobFrame = null;
-}
-
-function toggleMinimize() {
-    if (isMinimized) {
-        blobFrame.style.display = "block";
-        blobFrameContainer.style.boxShadow = "0 2px 5px rgba(0, 0, 0, 0.2)";
-        isMinimized = false;
-    } else {
-        blobFrame.style.display = "none";
-        blobFrameContainer.style.boxShadow = "none";
-        isMinimized = true;
-    }
-}
-
-function closeWithAnimation(element) {
-    element.style.transition = "opacity 0.1s";
-    element.style.opacity = "0";
-
-    setTimeout(() => {
-        element.remove();
-    }, 100);
-}
