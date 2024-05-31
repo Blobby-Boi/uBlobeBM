@@ -25,12 +25,12 @@ document.addEventListener("keydown", function(blob) {
 
         const closeButton = document.createElement("button");
         closeButton.innerText = "X";
-        closeButton.style.cssText = "position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: none; border: none; font-size: 16px; color: #ffffff; cursor: pointer;";
+        closeButton.style.cssText = "position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background: none; border: none; font-size: 16px; color: #fff; cursor: pointer; transition: color 0.3s;";
         closeButton.addEventListener("mouseenter", function() {
             closeButton.style.color = "#046908";
         });
         closeButton.addEventListener("mouseleave", function() {
-            closeButton.style.color = "#ffffff";
+            closeButton.style.color = "#fff";
         });
         closeButton.addEventListener("click", closeIframe);
 
