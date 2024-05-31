@@ -231,10 +231,6 @@
             function runScript(selectedItemValue) {
                 overlay.style.display = 'flex';
 
-                function removeOverlay() {
-                    overlay.style.display = 'none';
-                }
-
                 setTimeout(() => {
                     try {
                        window.parent.postMessage("run:" + decodeURIComponent(selectedItemValue), '*');
@@ -242,8 +238,6 @@
                         console.error('Error executing script:', error);
                         alert('An error occured while executing the bookmarklet. Try double checking the code of the bookmarklet.');
                     }
-
-                    removeOverlay();
                 }, 500);
             }
 
