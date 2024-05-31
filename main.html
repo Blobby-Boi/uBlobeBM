@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlobeBM</title>
     <style>
-        /* Import the Varela Round font */
         @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
         body {
@@ -20,7 +19,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px;
-            background-color: black; /* Set the background color to black */
+            background-color: black;
             color: white;
         }
 
@@ -37,7 +36,7 @@
 
         #itemListText {
             font-size: 18px;
-            font-family: 'Varela Round', sans-serif; /* Set the font family */
+            font-family: 'Varela Round', sans-serif;
         }
 
         #itemInputContainer {
@@ -47,22 +46,22 @@
         }
 
 	#newItemInput {
-   	    width: calc(100% + 590px); /* Adjust the width here */
-  	    padding: 5px; /* Add some padding for better appearance */
-	    border-radius: 5px; /* Rounded edges with a radius of 5px */
-	    margin-left: -600px; /* Move 300px to the left */
+   	    width: calc(100% + 590px);
+  	    padding: 5px;
+	    border-radius: 5px;
+	    margin-left: -600px;
 	}
 
 	@media (max-width: 769px) {
     		#newItemInput {
-        		width: auto; /* Reset width for larger screen sizes */
-        		margin-left: 0; /* Reset margin for larger screen sizes */
+        		width: auto;
+        		margin-left: 0;
     			}
 		}
 
         .item-list-container {
-            max-height: calc(100vh - 75px); /* Set max height to (100vh - header height) */
-            overflow-y: auto; /* Enable vertical scrolling */
+            max-height: calc(100vh - 75px);
+            overflow-y: auto;
         }
 
         .item-list {
@@ -112,14 +111,13 @@
             cursor: pointer;
         }
 
-        /* Added overlay styles */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.8); /* White with some transparency */
+            background: rgba(255, 255, 255, 0.8);
             display: none;
             justify-content: center;
             align-items: center;
@@ -139,10 +137,8 @@
         </div>
     </div>
 
-    <!-- Added overlay element -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- Added item-list-container div for scrolling -->
     <div class="item-list-container">
         <ul id="itemList" class="item-list"></ul>
     </div>
@@ -181,7 +177,7 @@
                 itemButton.title = itemValue;
                 itemButton.addEventListener('click', () => {
                     const selectedItemValue = itemButton.title;
-                    window.parent.postMessage("run:" + decodeURIComponent(selectedItemValue), '*');
+                    runScript(selectedItemValue);
                 });
 
                 const removeButton = document.createElement('button');
@@ -233,30 +229,24 @@
             }
 
             function runScript(selectedItemValue) {
-                // Show the overlay
                 overlay.style.display = 'flex';
 
-                // Function to remove the overlay after the script has finished executing
                 function removeOverlay() {
                     overlay.style.display = 'none';
                 }
 
-                // Run the script after a 0.5-second delay
                 setTimeout(() => {
                     try {
-                        // Use eval to execute the script
-                        eval(selectedItemValue);
+                       window.parent.postMessage("run:" + decodeURIComponent(selectedItemValue), '*');
                     } catch (error) {
                         console.error('Error executing script:', error);
                         alert('An error occured while executing the bookmarklet. Try double checking the code of the bookmarklet.');
                     }
 
-                    // Remove the overlay
                     removeOverlay();
-                }, 500); // 500 milliseconds (0.5 seconds) delay
+                }, 500);
             }
 
-            // Load items from localStorage on page load
             const storedItems = localStorage.getItem('items');
             if (storedItems) {
                 const parsedItems = JSON.parse(storedItems);
