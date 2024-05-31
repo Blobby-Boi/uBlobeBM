@@ -21,7 +21,7 @@ document.addEventListener("keydown", function(blob) {
         blobFrame.style.cssText = "width: 100%; height: calc(100% - 30px); border: none; position: absolute; top: 30px; display: block;";
 
         const bar = document.createElement("div");
-        bar.style.cssText = "width: 100%; height: 30px; background-color: #4CAF50; position: relative; border-top-left-radius: 8px; border-top-right-radius: 8px; user-select: none;";
+        bar.style.cssText = "width: 100%; height: 30px; background-color: #4CAF50; position: relative; border-top-left-radius: 8px; border-top-right-radius: 8px; user-select: none; cursor: move;";
 
         const closeButton = document.createElement("button");
         closeButton.innerText = "X";
