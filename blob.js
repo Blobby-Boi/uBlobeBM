@@ -1,8 +1,16 @@
-let blobFrame = null;
-let isMinimized = false;
-
 document.addEventListener("keydown", function(blob) {
-    if (blob.key == "~" && blob.ctrlKey && !blobFrame) {
+    if (blob.key == "~" && blob.ctrlKey) {
+    
+    if (document.body.getAttribute("data-blob-frame-open") === "true") {
+            return;
+        }
+        
+        document.body.setAttribute("data-blob-frame-open", "true");
+        
+        
+        var blobFrame = null;
+        var isMinimized = false;
+
         const fontLink = document.createElement("link");
         fontLink.rel = "stylesheet";
         fontLink.href = "https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap";
