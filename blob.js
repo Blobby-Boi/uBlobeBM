@@ -12,6 +12,7 @@ if (blob.key == "~" && blob.ctrlKey) {
         faviconLink.href = "https://blobby-boi.github.io/uBlobeBM/favicon.png";
 	win.document.head.appendChild(faviconLink);
 	win.addEventListener("message", function (blob) {
+		alert("Received message:", blob.data);
 		blob.data.toString().startsWith("run:") && (eval(blob.data.toString().replace("run:", "")), win.close());
 		});
 	}
