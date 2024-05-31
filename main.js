@@ -54,29 +54,31 @@ document.addEventListener("keydown", function(blob) {
 
 let offsetX, offsetY;
 let blobFrameContainer;
-let barRect;
+let isDragging = false;
 
 function startDragging(e) {
     const rect = blobFrameContainer.getBoundingClientRect();
     offsetX = e.clientX - rect.left;
     offsetY = e.clientY - rect.top;
-    barRect = blobFrameContainer.getBoundingClientRect();
+    isDragging = true;
     document.addEventListener("mousemove", drag);
     document.addEventListener("mouseup", stopDragging);
 }
 
 function drag(e) {
+    if (!isDragging) return;
     let newX = e.clientX - offsetX;
     let newY = e.clientY - offsetY;
 
-    newX = Math.min(Math.max(newX, 0), window.innerWidth - barRect.width);
-    newY = Math.min(Math.max(newY, 0), window.innerHeight - barRect.height);
+    newX = Math.min(Math.max(newX, 0), window.innerWidth - blobFrameContainer.offsetWidth);
+    newY = Math.min(Math.max(newY, 0), window.innerHeight - blobFrameContainer.offsetHeight);
 
     blobFrameContainer.style.left = newX + "px";
     blobFrameContainer.style.top = newY + "px";
 }
 
 function stopDragging() {
+    isDragging = false;
     document.removeEventListener("mousemove", drag);
     document.removeEventListener("mouseup", stopDragging);
 }
