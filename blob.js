@@ -1,13 +1,13 @@
-const fontLink = document.createElement("link");
-fontLink.rel = "stylesheet";
-fontLink.href = "https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap";
-document.head.appendChild(fontLink);
-
 let blobFrame = null;
 let isMinimized = false;
 
 document.addEventListener("keydown", function(blob) {
     if (blob.key == "~" && blob.ctrlKey && !blobFrame) {
+        const fontLink = document.createElement("link");
+        fontLink.rel = "stylesheet";
+        fontLink.href = "https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap";
+        document.head.appendChild(fontLink);
+        
         if (blobFrame) {
             closeWithAnimation(blobFrameContainer);
             blobFrame = null;
