@@ -108,5 +108,5 @@ function closeWithAnimation(element) {
 
     setTimeout(() => {
         element.remove();
-    }, 200);
+    }, 100);
 }
