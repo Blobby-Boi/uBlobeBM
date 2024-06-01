@@ -40,10 +40,6 @@ document.addEventListener("keydown", function(blob) {
 
         bar.appendChild(titleText);
         bar.appendChild(closeButton);
-        
-        blobFrameContainer.addEventListener("mousedown", startDragging);
-    	blobFrameContainer.addEventListener("mousemove", drag);
-    	blobFrameContainer.addEventListener("mouseup", stopDragging);
 
         bar.addEventListener("mousedown", startDragging);
 
