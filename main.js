@@ -101,7 +101,7 @@ document.addEventListener("keydown", function(blob) {
 
         requestAnimationFrame(() => {
             blobFrameContainer.style.opacity = "1";
-            blobFrameContainer.style.transform = "translate(-50%, -50%) translateY(0)";
+            blobFrameContainer.style.transform = "translate(-50%, -47%) translateY(0)";
         });
 
         window.addEventListener("message", handleMessage);
