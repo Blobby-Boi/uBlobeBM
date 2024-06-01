@@ -14,7 +14,7 @@ document.addEventListener("keydown", function(blob) {
         }
 
         blobFrameContainer = document.createElement("div");
-        blobFrameContainer.style.cssText = "position: fixed; top: 50px; left: 50px; width: 600px; height: 400px; z-index: 9999; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); background-color: #ffffff;";
+        blobFrameContainer.style.cssText = "position: fixed; top: 50px; left: 50px; width: 600px; height: 400px; z-index: 9999; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); background-color: #ffffff; opacity: 0; transform: translateY(-10px); transition: opacity 0.3s, transform 0.3s;";
 
         blobFrame = document.createElement("iframe");
         blobFrame.src = "https://blobby-boi.github.io/uBlobeBM/main.html";
@@ -47,6 +47,11 @@ document.addEventListener("keydown", function(blob) {
         blobFrameContainer.appendChild(bar);
 
         document.body.appendChild(blobFrameContainer);
+
+        requestAnimationFrame(() => {
+            blobFrameContainer.style.opacity = "1";
+            blobFrameContainer.style.transform = "translateY(0)";
+        });
 
         window.addEventListener("message", handleMessage);
     }
@@ -108,5 +113,5 @@ function closeWithAnimation(element) {
 
     setTimeout(() => {
         element.remove();
-    }, 100);
+    }, 200);
 }
