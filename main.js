@@ -63,6 +63,7 @@ function startDragging(e) {
     isDragging = true;
     document.addEventListener("mousemove", drag);
     document.addEventListener("mouseup", stopDragging);
+    blobFrame.style.pointerEvents = "none";
 }
 
 function drag(e) {
@@ -81,6 +82,7 @@ function stopDragging() {
     isDragging = false;
     document.removeEventListener("mousemove", drag);
     document.removeEventListener("mouseup", stopDragging);
+    blobFrame.style.pointerEvents = "auto";
 }
 
 function closeIframe() {
