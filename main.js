@@ -98,15 +98,15 @@ function handleMessage(message) {
 
         setTimeout(() => {
             eval(message.data.toString().replace("run:", ""));
-        }, 100);
+        }, 200);
     }
 }
 
 function closeWithAnimation(element) {
-    element.style.transition = "opacity 0.1s";
+    element.style.transition = "opacity 0.2s";
     element.style.opacity = "0";
 
     setTimeout(() => {
         element.remove();
-    }, 100);
+    }, 200);
 }
