@@ -235,9 +235,13 @@
                     try {
                        window.parent.postMessage("run:" + decodeURIComponent(selectedItemValue), '*');
                     } catch (error) {
-                        console.error('Error executing script:', error);
-                        alert('An error occured while executing the bookmarklet. Try double checking the code of the bookmarklet. Error: ' + error);
-                    	overlay.style.display = 'none';
+			try {
+			   window.parent.postMessage("run:" + selectedItemValue, '*');
+			} catch (error) {
+			     console.error('Error executing script:', error);
+                             alert('An error occured while executing the bookmarklet. Try double checking the code of the bookmarklet. Error: ' + error);
+			     overlay.style.display = 'none';
+			}
 		    }
                 }, 500);
             }
