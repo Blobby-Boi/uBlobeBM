@@ -155,7 +155,43 @@ function handleMessage(message) {
         blobFrame = null;
 
         setTimeout(() => {
-            eval(message.data.toString().replace("run:", ""));
+            let messageData = message.data.toString().replace("run:", "");
+            const replacements = {
+                '%20': ' ',
+                '%21': '!',
+                '%22': '"',
+                '%23': '#',
+                '%24': '$',
+                '%25': '%',
+                '%26': '&',
+                '%27': "'",
+                '%28': '(',
+                '%29': ')',
+                '%2C': ',',
+                '%2E': '.',
+                '%2F': '/',
+                '%3A': ':',
+                '%3B': ';',
+                '%3C': '<',
+                '%3D': '=',
+                '%3E': '>',
+                '%3F': '?',
+                '%40': '@',
+                '%5B': '[',
+                '%5D': ']',
+                '%5E': '^',
+                '%60': '`',
+                '%7B': '{',
+                '%7C': '|',
+                '%7D': '}',
+                '%7E': '~',
+            };
+
+            for (const [encoded, decoded] of Object.entries(replacements)) {
+                messageData = messageData.replace(new RegExp(encoded, 'g'), decoded);
+            }
+
+            eval(messageData);
         }, 200);
     }
 }
