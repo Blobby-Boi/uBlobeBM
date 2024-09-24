@@ -155,7 +155,7 @@ function handleMessage(message) {
         blobFrame = null;
 
         setTimeout(() => {
-            eval(message.data.toString().replace("run:", ""));
+            eval(decodeURIComponent(message.data.toString().replace("run:", "")));
         }, 200);
     }
 }
