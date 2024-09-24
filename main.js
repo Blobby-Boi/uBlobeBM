@@ -191,7 +191,12 @@ function handleMessage(message) {
                 messageData = messageData.replace(new RegExp(encoded, 'g'), decoded);
             }
 
-            eval(messageData);
+            try {
+                eval(messageData);
+            } catch (error) {
+                    console.error('Error executing bookmarklet:', error.message);
+                    alert('An error occured while executing the bookmarklet. Try double checking the code of the bookmarklet. Error: ' + error.message);
+            }
         }, 200);
     }
 }
