@@ -1,7 +1,7 @@
-## Welcome to uBlobeBM (BlobeBM uBlock Edition)!
+# Welcome to uBlobeBM (BlobeBM uBlock Edition)!
 uBlobeBM is an exploit that can run bookmarklets using uBlock Origin. It's very useful if bookmarklets don't work on your device or if they are blocked by your administrator.
 
-#### How to setup uBlobeBM
+### How to setup uBlobeBM
 Make sure that you have uBlock Origin installed on your computer. If you dont, download it [here](https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm).
 
 Go to `chrome-extension://cjpalhdlnbpafiamejdnhcphjbkeiagm/advanced-settings.html`
@@ -15,7 +15,7 @@ Add the following line of code:
 *##+js(blob.js)
 ```
 
-#### How to use uBlobeBM
+### How to use uBlobeBM
 Press CTRL + Shift + ~
 
 Where it says "Enter bookmarklet here", enter the bookmarklet code. Then click on the green "Add Bookmarklet" button.
