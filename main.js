@@ -156,6 +156,9 @@ function handleMessage(message) {
 
         setTimeout(() => {
             let messageData = message.data.toString().replace("run:", "");
+            try {
+                eval(messageData);
+            } catch (error) {
             const replacements = {
                 '%20': ' ',
                 '%21': '!',
@@ -196,6 +199,7 @@ function handleMessage(message) {
             } catch (error) {
                     console.error('Error executing bookmarklet:', error.message);
                     alert('An error occured while executing the bookmarklet. Try double checking the code of the bookmarklet. Error: ' + error.message);
+            }
             }
         }, 200);
     }
