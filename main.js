@@ -157,7 +157,7 @@ function handleMessage(message) {
         setTimeout(() => {
             let messageData = message.data.toString().replace("run:", "");
             try {
-                eval(messageData);
+                eval(decodeURIComponent(messageData));
             } catch (error) {
             const replacements = {
                 '%20': ' ',
