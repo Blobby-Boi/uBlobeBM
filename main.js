@@ -155,10 +155,10 @@ function handleMessage(message) {
         blobFrame = null;
 
         setTimeout(() => {
-            let messageData = message.data.toString().replace("run:", "");
             try {
-                eval(decodeURIComponent(messageData));
+                eval(decodeURIComponent(message.data.toString().replace("run:", "")));
             } catch (error) {
+            let messageData = message.data.toString().replace("run:", "");
             const replacements = {
                 '%20': ' ',
                 '%21': '!',
