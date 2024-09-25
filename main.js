@@ -155,9 +155,6 @@ function handleMessage(message) {
         blobFrame = null;
 
         setTimeout(() => {
-            try {
-                eval(decodeURIComponent(message.data.toString().replace("run:", "")));
-            } catch (error) {
             let messageData = message.data.toString().replace("run:", "");
             const replacements = {
                 '%20': ' ',
@@ -199,7 +196,6 @@ function handleMessage(message) {
             } catch (error) {
                     console.error('Error executing bookmarklet:', error.message);
                     alert('An error occured while executing the bookmarklet. Try double checking the code of the bookmarklet. Error: ' + error.message);
-            }
             }
         }, 200);
     }
