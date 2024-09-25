@@ -232,11 +232,7 @@
                 overlay.style.display = 'flex';
 		    
                 setTimeout(() => {
-                    try {
-                       window.parent.postMessage("run:" + decodeURIComponent(selectedItemValue), '*');
-                    } catch (error) {
-		         window.parent.postMessage("run:" + selectedItemValue, '*');
-		    }
+			window.parent.postMessage("run:" + selectedItemValue, '*');
                 }, 500);
             }
 
