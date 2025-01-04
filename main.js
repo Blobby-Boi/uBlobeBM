@@ -6,7 +6,7 @@ document.head.appendChild(fontLink);
 let blobFrame = null;
 let blobFrameContainer = null;
 
-document.addEventListener("keydown", function(blob) {
+document.addEventListener("keydown", function (blob) {
     if (blob.key == "~" && blob.ctrlKey && !blobFrame) {
         if (blobFrame) {
             closeWithAnimation(blobFrameContainer);
@@ -32,7 +32,6 @@ document.addEventListener("keydown", function(blob) {
         `;
 
         blobFrame = document.createElement("iframe");
-        blobFrame.src = "https://blobby-boi.github.io/uBlobeBM/main.html";
         blobFrame.style.cssText = `
             width: 100%;
             height: calc(100% - 40px);
@@ -41,6 +40,15 @@ document.addEventListener("keydown", function(blob) {
             top: 40px;
             display: block;
         `;
+
+        fetch("https://raw.githubusercontent.com/Blobby-Boi/uBlobeBM/refs/heads/main/main.html")
+            .then(response => response.text())
+            .then(html => {
+                const uBlobeHtml = blobFrame.contentDocument || blobFrame.contentWindow.document;
+                uBlobeHtml.open();
+                uBlobeHtml.write(html);
+                uBlobeHtml.close();
+            });
 
         const bar = document.createElement("div");
         bar.style.cssText = `
