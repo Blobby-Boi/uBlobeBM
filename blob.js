@@ -1,7 +1,7 @@
 /// blob.js
 document.addEventListener('DOMContentLoaded', function () {
-    var main = 'https://cdn.jsdelivr.net/gh/Blobby-Boi/uBlobeBM@657c7a8/main.js';
-    var fallback = 'https://blobby-boi.github.io/uBlobeBM/main.js';
+    var main = 'https://blobby-boi.github.io/uBlobeBM/main.js';
+    var fallback = 'https://cdn.jsdelivr.net/gh/Blobby-Boi/uBlobeBM@657c7a8/main.js';
     var script = document.createElement('script');
     script.src = main;
     script.onerror = function () {
