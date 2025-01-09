@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+setTimeout(() => {
     const fontLink = document.createElement("link");
     fontLink.rel = "stylesheet";
     fontLink.href = "https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap";
@@ -232,4 +232,4 @@ document.addEventListener("DOMContentLoaded", function () {
             isClosing = false;
         }, 200);
     }
-});
+}, 500);
