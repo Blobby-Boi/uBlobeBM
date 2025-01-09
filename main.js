@@ -6,9 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
     
     let blobFrame = null;
     let blobFrameContainer = null;
+    let isOpening = false;
+    let isClosing = false;
     
     document.addEventListener("keydown", function (blob) {
-        if (blob.key == "~" && blob.ctrlKey && !blobFrame) {
+        if (blob.key == "~" && blob.ctrlKey && !blobFrame && !isClosing) {
+            isOpening = true;            
             if (blobFrame) {
                 closeWithAnimation(blobFrameContainer);
                 blobFrame = null;
@@ -112,7 +115,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 blobFrameContainer.style.opacity = "1";
                 blobFrameContainer.style.transform = "translate(-50%, -47%) translateY(0)";
             });
-
+            
+            setTimeout(() => {
+                isOpening = false;
+            }, 300);
+            
             window.addEventListener("message", handleMessage);
         }
     });
@@ -153,6 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function closeIframe() {
+    	if (isOpening || isClosing) return;
         closeWithAnimation(blobFrameContainer);
         blobFrame = null;
         window.removeEventListener("message", handleMessage);
@@ -215,11 +223,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function closeWithAnimation(element) {
+        isClosing = true;
         element.style.transition = "opacity 0.2s ease";
         element.style.opacity = "0";
 
         setTimeout(() => {
             element.remove();
+            isClosing = false;
         }, 200);
     }
 });
