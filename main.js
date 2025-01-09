@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             blobFrameContainer = document.createElement("div");
             blobFrameContainer.style.cssText = `
+                all: initial;
                 position: fixed;
                 width: 600px;
                 height: 400px;
@@ -37,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             blobFrame = document.createElement("iframe");
             blobFrame.style.cssText = `
+                all: initial;
                 width: 100%;
                 height: calc(100% - 40px);
                 border: none;
@@ -56,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const bar = document.createElement("div");
             bar.style.cssText = `
+                all: initial;
                 width: 100%;
                 height: 40px;
                 background-color: #4CAF50;
@@ -69,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const closeButton = document.createElement("button");
             closeButton.innerText = "×";
             closeButton.style.cssText = `
+                all: initial;
                 position: absolute;
                 top: 50%;
                 right: 15px;
@@ -91,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const titleText = document.createElement("div");
             titleText.innerText = "uBlobeBM";
             titleText.style.cssText = `
+                all: initial;
                 position: absolute;
                 top: 50%;
                 left: 50%;
