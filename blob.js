@@ -8,7 +8,11 @@ document.addEventListener('DOMContentLoaded', function () {
         var script2 = document.createElement('script');
         script2.src = fallback;
         script2.onerror = function (error) {
+            window.addEventListener("keyup", event => {
+                if (event.ctrlKey && event.which === 192) {
             alert('uBlobeBM failed to load! Error: ' + error);
+                }
+            }            
         };
         document.body.appendChild(script2);
     };
