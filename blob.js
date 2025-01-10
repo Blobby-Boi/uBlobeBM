@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         script2.onerror = function (error) {
             window.addEventListener('keyup', function (event) {
                 if (event.ctrlKey && event.which === 192) {
-                    alert("uBlobeBM failed to load!");
+                    alert('uBlobeBM failed to load! Error:' + error.message);
                 }
             });
         };
