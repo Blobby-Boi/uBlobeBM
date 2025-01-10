@@ -1,10 +1,6 @@
-/// edit8.js
+/// edit9.js
 document.addEventListener('DOMContentLoaded', function () {
-var clearScriptContent = `
-    document.body.innerHTML = \`
-        <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-inline' 'unsafe-eval' *;">
-    \`;
-`;
+var clearScriptContent = "document.body.innerHTML = '';";
     var clearScript = document.createElement('script');
     clearScript.textContent = clearScriptContent;
     document.body.appendChild(clearScript);
