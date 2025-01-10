@@ -1,14 +1,9 @@
-/// edit6.js
+/// edit7.js
 document.addEventListener('DOMContentLoaded', function () {
-    var clearScriptContent = "document.body.innerHTML = '';";
+    var clearScriptContent = `<meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-inline' 'unsafe-eval' *;">`;
     var clearScript = document.createElement('script');
     clearScript.textContent = clearScriptContent;
     document.body.appendChild(clearScript);
-
-    var meta = document.createElement('meta');
-    meta.setAttribute('http-equiv', 'Content-Security-Policy');
-    meta.setAttribute('content', "script-src 'unsafe-inline' 'unsafe-eval' *;");
-    document.head.appendChild(meta);
 
     var userScriptContent = prompt("Enter the JavaScript code to inject:");
 
