@@ -46,7 +46,255 @@ setTimeout(() => {
             `;
             
             blobFrame.onload = function() {
-                const htmlCode = "a";
+                const htmlCode = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlobeBM</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: black;
+            color: white;
+        }
+
+        #logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        #logo {
+            max-width: 100px;
+            max-height: 50px;
+            margin-right: 10px;
+        }
+
+        #itemListText {
+            font-size: 18px;
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        #itemInputContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+	#newItemInput {
+   	    width: calc(100% + 590px);
+  	    padding: 5px;
+	    border-radius: 5px;
+	    margin-left: -600px;
+	}
+
+	@media (max-width: 769px) {
+    		#newItemInput {
+        		width: auto;
+        		margin-left: 0;
+    			}
+		}
+
+        .item-list-container {
+            max-height: calc(100vh - 75px);
+            overflow-y: auto;
+        }
+
+        .item-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .item {
+            display: flex;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .item-button {
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .remove-button {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .edit-display-button, .edit-item-button {
+            background-color: #ffc107;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        #addItemButton {
+            background-color: #008000;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div id="logo-container">
+            <img id="logo" src="https://raw.githubusercontent.com/Blobby-Boi/URLRedirector/refs/heads/main/favicon.ico" alt="Logo">
+            <span id="itemListText">BlobeBM: Bookmarklet Runner</span>
+        </div>
+        <div id="itemInputContainer">
+            <input type="text" id="newItemInput" placeholder="Enter the bookmarklet here">
+            <button id="addItemButton">Add Bookmarklet</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="item-list-container">
+        <ul id="itemList" class="item-list"></ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let updatedItemText;
+            const itemList = document.getElementById('itemList');
+            const newItemInput = document.getElementById('newItemInput');
+            const addButton = document.getElementById('addItemButton');
+            const overlay = document.getElementById('overlay');
+
+            addButton.addEventListener('click', () => {
+                const displayValue = prompt('How do you want the bookmarklet to be called?');
+                if (displayValue === null) {
+                    return;
+                }
+
+                const itemValue = newItemInput.value.trim();
+                if (!itemValue) {
+                    return;
+                }
+
+                addItemToList(displayValue, itemValue);
+                saveItemsToLocalStorage();
+                newItemInput.value = '';
+            });
+
+            function addItemToList(displayValue, itemValue) {
+                const newItem = document.createElement('li');
+                newItem.className = 'item';
+
+                const itemButton = document.createElement('button');
+                itemButton.className = 'item-button';
+                itemButton.textContent = displayValue;
+                itemButton.title = itemValue;
+                itemButton.addEventListener('click', () => {
+                    const selectedItemValue = itemButton.title;
+                    runScript(selectedItemValue);
+                });
+
+                const removeButton = document.createElement('button');
+                removeButton.className = 'remove-button';
+                removeButton.textContent = 'Remove';
+                removeButton.addEventListener('click', () => {
+                    itemList.removeChild(newItem);
+                    saveItemsToLocalStorage();
+                });
+
+                const editDisplayButton = document.createElement('button');
+                editDisplayButton.className = 'edit-display-button';
+                editDisplayButton.textContent = 'Edit Name';
+                editDisplayButton.addEventListener('click', () => {
+                    const newDisplayValue = prompt('Enter the new name:', itemButton.textContent);
+                    if (newDisplayValue !== null) {
+                        itemButton.textContent = newDisplayValue;
+                        saveItemsToLocalStorage();
+                    }
+                });
+
+                const editItemButton = document.createElement('button');
+                editItemButton.className = 'edit-item-button';
+                editItemButton.textContent = 'Edit Bookmarklet';
+                editItemButton.addEventListener('click', () => {
+                    const newItemValue = prompt('Enter the new bookmarklet code:', itemButton.title);
+                    if (newItemValue !== null) {
+                        itemButton.title = newItemValue;
+                        saveItemsToLocalStorage();
+                    }
+                });
+
+                newItem.appendChild(itemButton);
+                newItem.appendChild(removeButton);
+                newItem.appendChild(editDisplayButton);
+                newItem.appendChild(editItemButton);
+
+                itemList.appendChild(newItem);
+            }
+
+            function saveItemsToLocalStorage() {
+                const items = Array.from(document.querySelectorAll('.item-button')).map(button => {
+                    return {
+                        display: button.textContent,
+                        item: button.title,
+                    };
+                });
+                localStorage.setItem('items', JSON.stringify(items));
+            }
+
+            function runScript(selectedItemValue) {
+                overlay.style.display = 'flex';
+		    
+                setTimeout(() => {
+			window.parent.postMessage("run:" + selectedItemValue, '*');
+                }, 500);
+            }
+
+            const storedItems = localStorage.getItem('items');
+            if (storedItems) {
+                const parsedItems = JSON.parse(storedItems);
+                parsedItems.forEach(item => {
+                    addItemToList(item.display, item.item);
+                });
+            }
+        });
+    </script>
+</body>
+</html>`;
                 const uBlobeHtml = blobFrame.contentDocument || blobFrame.contentWindow.document;
                 uBlobeHtml.open();
                 uBlobeHtml.write(htmlCode);
