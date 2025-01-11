@@ -14,13 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
             var blobUrl = URL.createObjectURL(blob);
             var script3 = document.createElement('script');
             script3.src = blobUrl;
-            script3.onerror = function () {
-                window.addEventListener('keydown', function (event) {
-                    if (event.ctrlKey && event.which === 192) {
-                        alert('uBlobeBM failed to load on this page!');
-                    }
-                });
-            };
             document.body.appendChild(script3);
         };
         document.body.appendChild(script2);
