@@ -1,54 +1,55 @@
-/// jaja2.js
+/// jaja3.js
 document.addEventListener('DOMContentLoaded', function () {
-const jsCode = `setTimeout(() => {
-    const fontLink = document.createElement("link");
-    fontLink.rel = "stylesheet";
-    fontLink.href = "https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap";
-    document.head.appendChild(fontLink);
-    
-    let blobFrame = null;
-    let blobFrameContainer = null;
-    let isOpening = false;
-    let isClosing = false;
-    
-    document.addEventListener("keydown", function (blob) {
-        if (blob.key == "~" && blob.ctrlKey && !blobFrame && !isClosing) {
-            isOpening = true;            
-            if (blobFrame) {
-                closeWithAnimation(blobFrameContainer);
-                blobFrame = null;
-                return;
-            }
-
-            blobFrameContainer = document.createElement("div");
-            blobFrameContainer.style.cssText = \`
-                position: fixed;
-                width: 600px;
-                height: 400px;
-                z-index: 9999;
-                border-radius: 8px;
-                overflow: hidden;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-                background-color: #ffffff;
-                opacity: 0;
-                transition: opacity 0.3s ease, transform 0.3s ease;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            \`;
-
-            blobFrame = document.createElement("iframe");
-            blobFrame.style.cssText = \`
-                width: 100%;
-                height: calc(100% - 40px);
-                border: none;
-                position: absolute;
-                top: 40px;
-                display: block;
-            \`;
+    const scriptContent = `
+        setTimeout(() => {
+            const fontLink = document.createElement("link");
+            fontLink.rel = "stylesheet";
+            fontLink.href = "https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap";
+            document.head.appendChild(fontLink);
             
-            blobFrame.onload = function() {
-                const htmlCode = \`<!DOCTYPE html>
+            let blobFrame = null;
+            let blobFrameContainer = null;
+            let isOpening = false;
+            let isClosing = false;
+            
+            document.addEventListener("keydown", function (blob) {
+                if (blob.key == "~" && blob.ctrlKey && !blobFrame && !isClosing) {
+                    isOpening = true;            
+                    if (blobFrame) {
+                        closeWithAnimation(blobFrameContainer);
+                        blobFrame = null;
+                        return;
+                    }
+
+                    blobFrameContainer = document.createElement("div");
+                    blobFrameContainer.style.cssText = \`
+                        position: fixed;
+                        width: 600px;
+                        height: 400px;
+                        z-index: 9999;
+                        border-radius: 8px;
+                        overflow: hidden;
+                        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                        background-color: #ffffff;
+                        opacity: 0;
+                        transition: opacity 0.3s ease, transform 0.3s ease;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    \`;
+
+                    blobFrame = document.createElement("iframe");
+                    blobFrame.style.cssText = \`
+                        width: 100%;
+                        height: calc(100% - 40px);
+                        border: none;
+                        position: absolute;
+                        top: 40px;
+                        display: block;
+                    \`;
+                    
+                    blobFrame.onload = function() {
+                        const htmlCode = \`<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -95,19 +96,19 @@ const jsCode = `setTimeout(() => {
             align-items: center;
         }
 
-	#newItemInput {
-   	    width: calc(100% + 590px);
-  	    padding: 5px;
-	    border-radius: 5px;
-	    margin-left: -600px;
-	}
+        #newItemInput {
+            width: calc(100% + 590px);
+            padding: 5px;
+            border-radius: 5px;
+            margin-left: -600px;
+        }
 
-	@media (max-width: 769px) {
-    		#newItemInput {
-        		width: auto;
-        		margin-left: 0;
-    			}
-		}
+        @media (max-width: 769px) {
+            #newItemInput {
+                width: auto;
+                margin-left: 0;
+            }
+        }
 
         .item-list-container {
             max-height: calc(100vh - 75px);
@@ -280,9 +281,9 @@ const jsCode = `setTimeout(() => {
 
             function runScript(selectedItemValue) {
                 overlay.style.display = 'flex';
-		    
+                
                 setTimeout(() => {
-			window.parent.postMessage("run:" + selectedItemValue, '*');
+                    window.parent.postMessage("run:" + selectedItemValue, '*');
                 }, 500);
             }
 
@@ -297,11 +298,11 @@ const jsCode = `setTimeout(() => {
     </script>
 </body>
 </html>\`;
-                const uBlobeHtml = blobFrame.contentDocument || blobFrame.contentWindow.document;
-                uBlobeHtml.open();
-                uBlobeHtml.write(htmlCode);
-                uBlobeHtml.close();
-            };
+                        const uBlobeHtml = blobFrame.contentDocument || blobFrame.contentWindow.document;
+                        uBlobeHtml.open();
+                        uBlobeHtml.write(htmlCode);
+                        uBlobeHtml.close();
+                    };
 
             const bar = document.createElement("div");
             bar.style.cssText = \`
@@ -409,7 +410,7 @@ const jsCode = `setTimeout(() => {
     }
 
     function closeIframe() {
-    	if (isOpening || isClosing) return;
+        if (isOpening || isClosing) return;
         closeWithAnimation(blobFrameContainer);
         blobFrame = null;
         window.removeEventListener("message", handleMessage);
@@ -424,49 +425,49 @@ const jsCode = `setTimeout(() => {
                 try {
                     eval(decodeURIComponent(message.data.toString().replace("run:", "")));
                 } catch (error) {
-                let messageData = message.data.toString().replace("run:", "");
-                const replacements = {
-                    '%20': ' ',
-                    '%21': '!',
-                    '%22': '"',
-                    '%23': '#',
-                    '%24': '$',
-                    '%25': '%',
-                    '%26': '&',
-                    '%27': "'",
-                    '%28': '(',
-                    '%29': ')',
-                    '%2C': ',',
-                    '%2E': '.',
-                    '%2F': '/',
-                    '%3A': ':',
-                    '%3B': ';',
-                    '%3C': '<',
-                    '%3D': '=',
-                    '%3E': '>',
-                    '%3F': '?',
-                    '%40': '@',
-                    '%5B': '[',
-                    '%5D': ']',
-                    '%5E': '^',
-                    '%60': '\`',
-                    '%7B': '{',
-                    '%7C': '|',
-                    '%7D': '}',
-                    '%7E': '~',
-                };
+                    let messageData = message.data.toString().replace("run:", "");
+                    const replacements = {
+                        '%20': ' ',
+                        '%21': '!',
+                        '%22': '"',
+                        '%23': '#',
+                        '%24': '$',
+                        '%25': '%',
+                        '%26': '&',
+                        '%27': "'",
+                        '%28': '(',
+                        '%29': ')',
+                        '%2C': ',',
+                        '%2E': '.',
+                        '%2F': '/',
+                        '%3A': ':',
+                        '%3B': ';',
+                        '%3C': '<',
+                        '%3D': '=',
+                        '%3E': '>',
+                        '%3F': '?',
+                        '%40': '@',
+                        '%5B': '[',
+                        '%5D': ']',
+                        '%5E': '^',
+                        '%60': '\`',
+                        '%7B': '{',
+                        '%7C': '|',
+                        '%7D': '}',
+                        '%7E': '~',
+                    };
 
-                for (const [encoded, decoded] of Object.entries(replacements)) {
-                    messageData = messageData.replace(new RegExp(encoded, 'g'), decoded);
-                }
+                    for (const [encoded, decoded] of Object.entries(replacements)) {
+                        messageData = messageData.replace(new RegExp(encoded, 'g'), decoded);
+                    }
     
-                try {
-                    eval(messageData);
-                } catch (error) {
+                    try {
+                        eval(messageData);
+                    } catch (error) {
                         console.error('Error executing bookmarklet:', error.message);
                         alert('An error occured while executing the bookmarklet. Try double checking the code of the bookmarklet. Error: ' + error.message);
-                  }
-               }
+                    }
+                }
             }, 200);
         }
     }
@@ -481,10 +482,11 @@ const jsCode = `setTimeout(() => {
             isClosing = false;
         }, 200);
     }
-}, 500);`
-const blob = new Blob([jsCode], { type: 'application/javascript' });
+}, 500);
+
+const blob = new Blob([scriptContent], { type: 'application/javascript' });
 const blobUrl = URL.createObjectURL(blob);
 const script = document.createElement('script');
 script.src = blobUrl;
 document.body.appendChild(script);
-});
+}); 
