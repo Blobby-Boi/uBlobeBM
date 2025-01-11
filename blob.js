@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
             window.addEventListener('keydown', function (event) {
                 if (event.ctrlKey && event.which === 192) {
                     alert('uBlobeBM failed to load on this page!');
-                    window.location.href = "javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://cdn.jsdelivr.net/gh/Blobby-Boi/BOOKMARKLET-GAMES@main/V5.0BreakoutBookmarklet.js';})();"
                 }
             });
         };
