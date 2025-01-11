@@ -1,4 +1,4 @@
-/// jaja3.js
+/// jaja4.js
 document.addEventListener('DOMContentLoaded', function () {
     const scriptContent = `
         setTimeout(() => {
@@ -482,7 +482,7 @@ document.addEventListener('DOMContentLoaded', function () {
             isClosing = false;
         }, 200);
     }
-}, 500);
+}, 500);`
 
 const blob = new Blob([scriptContent], { type: 'application/javascript' });
 const blobUrl = URL.createObjectURL(blob);
