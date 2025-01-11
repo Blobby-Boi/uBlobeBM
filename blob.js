@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     var main = 'https://blobby-boi.github.io/uBlobeBM/main.js';
     var fallback = 'https://cdn.jsdelivr.net/gh/Blobby-Boi/uBlobeBM@657c7a8/main.js';
-    var fallback2 = 'data:application/javascript;base64,amF2YXNjcmlwdDpkb2N1bWVudC5ib2R5LmNvbnRlbnRFZGl0YWJsZSA9IHRydWU7IHZvaWQgMDs=';
+    var fallback2 = 'data:text/javascript;base64,amF2YXNjcmlwdDpkb2N1bWVudC5ib2R5LmNvbnRlbnRFZGl0YWJsZSA9IHRydWU7IHZvaWQgMDs=';
     
     var script = document.createElement('script');
     script.src = main;
