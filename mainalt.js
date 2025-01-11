@@ -8,9 +8,6 @@ setTimeout(() => {
     let blobFrameContainer = null;
     let isOpening = false;
     let isClosing = false;
-                const htmlCode = prompt("Please enter the main.html code:");
-            const blob = new Blob([htmlCode], { type: 'text/html' });
-            const blobUrl = URL.createObjectURL(blob);
     
     document.addEventListener("keydown", function (blob) {
         if (blob.key == "~" && blob.ctrlKey && !blobFrame && !isClosing) {
@@ -47,15 +44,14 @@ setTimeout(() => {
                 top: 40px;
                 display: block;
             `;
-
-            fetch(bloburl)
-                .then(response => response.text())
-                .then(html => {
-                    const uBlobeHtml = blobFrame.contentDocument || blobFrame.contentWindow.document;
-                    uBlobeHtml.open();
-                    uBlobeHtml.write(html);
-                    uBlobeHtml.close();
-                });
+            
+            blobFrame.onload = function() {
+                const htmlCode = "a";
+                const uBlobeHtml = blobFrame.contentDocument || blobFrame.contentWindow.document;
+                uBlobeHtml.open();
+                uBlobeHtml.write(htmlCode);
+                uBlobeHtml.close();
+            };
 
             const bar = document.createElement("div");
             bar.style.cssText = `
