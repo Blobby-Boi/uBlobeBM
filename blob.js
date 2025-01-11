@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     var main = 'https://blobby-boi.github.io/uBlobeBM/main.js';
     var fallback = 'https://cdn.jsdelivr.net/gh/Blobby-Boi/uBlobeBM@657c7a8/main.js';
-    var data = 'https://google.com';
+    var fallback2 = 'https://google.com';
     
     var script = document.createElement('script');
     script.src = main;
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         script2.src = fallback;
         script2.onerror = function () {
             var script3 = document.createElement('script');
-            script3.src = data;
+            script3.src = fallback2;
             script3.onerror = function () {
                 window.addEventListener('keydown', function (event) {
                     if (event.ctrlKey && event.which === 192) {
