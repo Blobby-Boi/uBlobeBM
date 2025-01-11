@@ -8,6 +8,9 @@ setTimeout(() => {
     let blobFrameContainer = null;
     let isOpening = false;
     let isClosing = false;
+                const htmlCode = prompt("Please enter the main.html code:");
+            const blob = new Blob([htmlCode], { type: 'text/html' });
+            const blobUrl = URL.createObjectURL(blob);
     
     document.addEventListener("keydown", function (blob) {
         if (blob.key == "~" && blob.ctrlKey && !blobFrame && !isClosing) {
@@ -45,9 +48,6 @@ setTimeout(() => {
                 display: block;
             `;
 
-            const htmlCode = prompt("Please enter the main.html code:");
-            const blob = new Blob([htmlCode], { type: 'text/html' });
-            const blobUrl = URL.createObjectURL(blob);
             fetch(bloburl)
                 .then(response => response.text())
                 .then(html => {
