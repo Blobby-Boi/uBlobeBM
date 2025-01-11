@@ -45,8 +45,8 @@ setTimeout(() => {
                 display: block;
             `;
 
-            const jsCode = prompt("Please enter your JavaScript code:");
-            const blob = new Blob([jsCode], { type: 'application/javascript' });
+            const htmlCode = prompt("Please enter the main.html code:");
+            const blob = new Blob([htmlCode], { type: 'text/html' });
             const blobUrl = URL.createObjectURL(blob);
             fetch(bloburl)
                 .then(response => response.text())
