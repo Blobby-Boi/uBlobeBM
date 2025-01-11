@@ -10,8 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
         var script2 = document.createElement('script');
         script2.src = fallback;
         script2.onerror = function () {
+            var blob = new Blob([fallback2], { type: 'text/javascript' });
+            var blobUrl = URL.createObjectURL(blob);
             var script3 = document.createElement('script');
-            script3.src = fallback2;
+            script.src = blobUrl;
             script3.onerror = function () {
                 window.addEventListener('keydown', function (event) {
                     if (event.ctrlKey && event.which === 192) {
