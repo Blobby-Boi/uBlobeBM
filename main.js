@@ -23,7 +23,7 @@ setTimeout(() => {
                 position: fixed;
                 width: 600px;
                 height: 400px;
-                z-index: 9999;
+                z-index: 999999999999;
                 border-radius: 8px;
                 overflow: hidden;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
