@@ -1,4 +1,4 @@
-/// uhuh.js
+/// uheuh.js
 document.addEventListener('DOMContentLoaded', function () {
     var main = 'https://blobby-boi.github.io/uBlobeBM/main.js';
     var fallback = 'https://cdn.jsdelivr.net/gh/Blobby-Boi/uBlobeBM@657c7a8/main.js';
@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
         var script2 = document.createElement('script');
         script2.src = fallback;
         script2.onerror = function () {
-            var blob = new Blob([fallback2], { type: 'text/javascript' });
-            var blobUrl = URL.createObjectURL(blob);
             var script3 = document.createElement('script');
+            var scriptBlob = new Blob([fallback2], { type: 'text/javascript' });
+            var blobUrl = URL.createObjectURL(scriptBlob);
             script3.src = blobUrl;
             script3.onerror = function () {
                 window.addEventListener('keydown', function (event) {
