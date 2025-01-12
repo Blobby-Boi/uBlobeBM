@@ -152,7 +152,7 @@
             const overlay = document.getElementById('overlay');
 
             addButton.addEventListener('click', () => {
-                const displayValue = prompt('How do you want the bookmarklet to be called?');
+                const displayValue = window.prompt('How do you want the bookmarklet to be called?');
                 if (displayValue === null) {
                     return;
                 }
@@ -192,7 +192,7 @@
                 editDisplayButton.className = 'edit-display-button';
                 editDisplayButton.textContent = 'Edit Name';
                 editDisplayButton.addEventListener('click', () => {
-                    const newDisplayValue = prompt('Enter the new name:', itemButton.textContent);
+                    const newDisplayValue = window.prompt('Enter the new name:', itemButton.textContent);
                     if (newDisplayValue !== null) {
                         itemButton.textContent = newDisplayValue;
                         saveItemsToLocalStorage();
@@ -203,7 +203,7 @@
                 editItemButton.className = 'edit-item-button';
                 editItemButton.textContent = 'Edit Bookmarklet';
                 editItemButton.addEventListener('click', () => {
-                    const newItemValue = prompt('Enter the new bookmarklet code:', itemButton.title);
+                    const newItemValue = window.prompt('Enter the new bookmarklet code:', itemButton.title);
                     if (newItemValue !== null) {
                         itemButton.title = newItemValue;
                         saveItemsToLocalStorage();
