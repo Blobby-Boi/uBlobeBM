@@ -22,16 +22,17 @@ document.addEventListener('DOMContentLoaded', function () {
             var script3 = document.createElement('script');
             script3.src = blobUrl;
             script3.onerror = function () {
-                var script4 = document.createElement('script');
-                script4.innerHTML = fallback2;
-                script4.onerror = function () {
+                try {
+                    var script4 = document.createElement('script');
+                    script4.innerHTML = fallback2;
+                    document.body.appendChild(script4);
+                } catch (error) {
                     window.addEventListener('keydown', function (event) {
                         if (event.ctrlKey && event.which === 192) {
-                            window.alert("uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy");
+                            window.alert("uBlobeBM failed to load on this page! Reason: " + error.message);
                         }
                     });
-                };
-                document.body.appendChild(script4);
+                }
             };
             document.body.appendChild(script3);
         };
