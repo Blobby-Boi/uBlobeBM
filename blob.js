@@ -24,13 +24,15 @@ document.addEventListener('DOMContentLoaded', function () {
             script3.onerror = function () {
                 var script4 = document.createElement('script');
                 script4.innerHTML = fallback2;
-                script4.onload = function () {
-                    window.addEventListener('keydown', function (event) {
-                        if (event.ctrlKey && event.which === 192) {
-                            window.alert("uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy");
-                        }
-                    });
-                };
+                setTimeout(() => {
+                    if (!script || script.readyState && script.readyState !== "complete") {
+                        window.addEventListener('keydown', function (event) {
+                            if (event.ctrlKey && event.which === 192) {
+                                window.alert("uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy");
+                            }
+                        });
+                    }
+                }, 1000);
                 document.body.appendChild(script4);
             };
             document.body.appendChild(script3);
