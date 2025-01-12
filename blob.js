@@ -1,6 +1,6 @@
 /// blob.js
 document.addEventListener('DOMContentLoaded', function () {
-    if (window.location.hostname.endsWith('.google.com')) {
+    if (window.location.hostname.endsWith('.google.com') && window.location.hostname !== 'www.google.com') {
         window.addEventListener('keydown', function (event) {
             if (event.ctrlKey && event.which === 192) {
                 alert("uBlobeBM failed to load on this page! Reason: Google Subdomain");
