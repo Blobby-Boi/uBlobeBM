@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
             script3.onerror = function () {
                 window.addEventListener('keydown', function (event) {
                     if (event.ctrlKey && event.which === 192) {
-                        alert("uBlobeBM failed to load on this page! Reason: Strict CSP");
+                        alert("uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy");
                     }
                 });
             };
