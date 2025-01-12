@@ -215,7 +215,7 @@ setTimeout(() => {
                     eval(messageData);
                 } catch (error) {
                         console.error('Error executing bookmarklet:', error.message);
-                        alert('An error occured while executing the bookmarklet. Try double checking the code of the bookmarklet. Error: ' + error.message);
+                        window.alert('An error occured while executing the bookmarklet. Try double checking the code of the bookmarklet. Error: ' + error.message);
                   }
                }
             }, 200);
