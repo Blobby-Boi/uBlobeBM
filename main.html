@@ -303,12 +303,21 @@
     	 	okButton.style.cursor = 'pointer';
             	okButton.style.fontFamily = '"Varela Round", sans-serif';
 
-    	 	okButton.addEventListener('click', () => {
-   		 	overlay.style.opacity = '0';
-   		 	alertBox.style.transform = 'scale(0.8)';
-   		 	document.body.style.filter = 'none';
-    			setTimeout(() => document.body.removeChild(overlay), 300);
-    	 	});
+    	 	const closeAlert = () => {
+       			overlay.style.opacity = '0';
+        		alertBox.style.transform = 'scale(0.8)';
+        		document.body.style.filter = 'none';
+        		setTimeout(() => document.body.removeChild(overlay), 300);
+        		document.removeEventListener('keydown', handleKeyPress);
+    		};
+
+    		okButton.addEventListener('click', closeAlert);
+
+   		 const handleKeyPress = (event) => {
+       	 		if (event.key === 'Enter') {
+            			closeAlert();
+        		}
+    		};
 
     		alertBox.appendChild(okButton);
     	 	overlay.appendChild(alertBox);
