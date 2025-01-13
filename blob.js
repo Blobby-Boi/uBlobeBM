@@ -25,13 +25,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 var script4 = document.createElement('script');
                 script4.innerHTML = fallback2;
                 document.body.appendChild(script4);
-                if (!document.hasEventListener('keydown')) {
-                    window.addEventListener('keydown', function (event) {
-                        if (event.ctrlKey && event.which === 192) {
-                            alert("uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy");
-                        }
-                    });
-                }
+                setTimeout(() => {
+                    if (!window.eventListeners || !window.eventListeners.some(e => e.type === 'keydown')) {
+                        window.addEventListener('keydown', function (event) {
+                            if (event.ctrlKey && event.which === 192) {
+                                alert("uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy");
+                            }
+                        });
+                    }
+                }, 600);
             };
             document.body.appendChild(script3);
         };
