@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.blobebmLoaded = false;
                 var script4 = document.createElement('script');
                 script4.innerHTML = fallback2;
-                document.body.appendChild(script4);
                 setTimeout(() => {
                     if (window.blobebmLoaded === false) {
                         window.addEventListener('keydown', function (event) {
@@ -39,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         });
                     }
                 }, 10);
+                document.body.appendChild(script4);
             };
             document.body.appendChild(script3);
         };
