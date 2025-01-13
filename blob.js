@@ -25,15 +25,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 var script4 = document.createElement('script');
                 script4.innerHTML = fallback2;
                 document.body.appendChild(script4);
-                setTimeout(() => {
-                    if (!script4 || script4.readyState && script4.readyState !== "complete") {
-                        window.addEventListener('keydown', function (event) {
-                            if (event.ctrlKey && event.which === 192) {
-                                alert("uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy");
-                            }
-                        });
-                    }
-                }, 1000);
+                if (!script4 || script4.readyState && script4.readyState !== "complete") {
+                    window.addEventListener('keydown', function (event) {
+                        if (event.ctrlKey && event.which === 192) {
+                            alert("uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy");
+                        }
+                    });
+                }
             };
             document.body.appendChild(script3);
         };
