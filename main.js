@@ -79,6 +79,7 @@ setTimeout(() => {
                 background: none;
                 border: none;
                 font-size: 20px;
+                font-family: 'Varela Round', sans-serif;
                 color: #fff;
                 cursor: pointer;
                 transition: color 0.3s ease;
