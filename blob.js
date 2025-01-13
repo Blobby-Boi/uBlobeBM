@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (window.blobebmLoaded === false) {
                         window.addEventListener('keydown', function (event) {
                             if (event.ctrlKey && event.which === 192) {
-                                (function() { var iframe = document.createElement('iframe'); iframe.style.position = 'absolute'; iframe.style.top = '-99999px'; iframe.style.left = '-99999px'; iframe.style.width = '1px'; iframe.style.height = '1px'; iframe.style.display = 'none'; document.body.appendChild(iframe); iframe.contentWindow.alert('uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy'); })();
+                                (function() { var iframe = document.createElement('iframe'); iframe.style.position = 'absolute'; iframe.style.top = '-99999px'; iframe.style.left = '-99999px'; iframe.style.width = '1px'; iframe.style.height = '1px'; iframe.style.display = 'none'; document.body.appendChild(iframe); var iframeDoc = iframe.contentDocument || iframe.contentWindow.document; iframeDoc.open(); iframeDoc.write('<script>alert("uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy");</script>'); iframeDoc.close(); })();
                             }
                         });
                     }
