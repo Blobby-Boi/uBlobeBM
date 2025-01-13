@@ -28,14 +28,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 script4.innerHTML = fallback2;
                 document.body.appendChild(script4);
                 setTimeout(() => {
-                    if (window.blobebmLoaded === true) {
+                    if (window.blobebmLoaded === false) {
                         window.addEventListener('keydown', function (event) {
                             if (event.ctrlKey && event.which === 192) {
                                 alert("uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy");
                             }
                         });
                     }
-                }, 600);
+                }, 10);
             };
             document.body.appendChild(script3);
         };
