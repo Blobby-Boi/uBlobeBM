@@ -73,6 +73,8 @@ setTimeout(() => {
                 position: absolute;
                 top: 50%;
                 right: 15px;
+                width: 25px;
+                height: 30px;
                 transform: translateY(-50%);
                 background: none;
                 border: none;
