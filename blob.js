@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (window.blobebmLoaded === false) {
                         window.addEventListener('keydown', function (event) {
                             if (event.ctrlKey && event.which === 192) {
-                                window.alert = originalAlert;
+                                window.alert = backupAlert;
                                 alert("uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy");
                             }
                         });
