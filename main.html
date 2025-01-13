@@ -312,12 +312,11 @@
     		};
 
     		okButton.addEventListener('click', closeAlert);
-
-   		 const handleKeyPress = (event) => {
-       	 		if (event.key === 'Enter') {
-            			closeAlert();
-        		}
-    		};
+   		document.addEventListener('keydown', (event) => {
+  			if (event.key === 'Enter') {
+    				closeAlert();
+  			}
+		});
 
     		alertBox.appendChild(okButton);
     	 	overlay.appendChild(alertBox);
