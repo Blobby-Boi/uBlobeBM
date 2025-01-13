@@ -36,6 +36,7 @@ setTimeout(() => {
             `;
 
             blobFrame = document.createElement("iframe");
+            blobFrame.setAttribute("tabindex", "0");
             blobFrame.style.cssText = `
                 width: 100%;
                 height: calc(100% - 40px);
@@ -114,6 +115,7 @@ setTimeout(() => {
             requestAnimationFrame(() => {
                 blobFrameContainer.style.opacity = "1";
                 blobFrameContainer.style.transform = "translate(-50%, -47%) translateY(0)";
+                blobFrame.focus();
             });
             
             setTimeout(() => {
