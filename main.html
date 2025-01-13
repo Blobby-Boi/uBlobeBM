@@ -152,23 +152,23 @@
             const overlay = document.getElementById('overlay');
 
             addButton.addEventListener('click', () => {
-				async function getBookmarkletName() {
-				    const displayValue = await customPrompt('How do you want the bookmarklet to be called?');
-				    console.log('Bookmarklet name:', displayValue);
-				    if (displayValue === null) {
+		async function getBookmarkletName() {
+			const displayValue = await customPrompt('How do you want the bookmarklet to be called?');
+			console.log('Bookmarklet name:', displayValue);
+			if (displayValue === null) {
  		               return;
-  			        }
+  			}
 
                 	const itemValue = newItemInput.value.trim();
                 	if (!itemValue) {
-               		   return;
+               			return;
                 	}
 
                 	addItemToList(displayValue, itemValue);
                 	saveItemsToLocalStorage();
                 	newItemInput.value = '';
-				}
-				getBookmarkletName();     
+		}
+		getBookmarkletName();     
             });
 
             function addItemToList(displayValue, itemValue) {
@@ -271,15 +271,20 @@
    		overlay.style.transition = 'opacity 0.3s ease';
 
    		const alertBox = document.createElement('div');
-   		alertBox.style.backgroundColor = 'white';
-    	 	alertBox.style.padding = '20px';
-    	 	alertBox.style.borderRadius = '8px';
-   		alertBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-  	     	alertBox.style.width = '300px';
-   		alertBox.style.textAlign = 'center';
-  	     	alertBox.style.fontFamily = '"Varela Round", sans-serif';
-   		alertBox.style.transform = 'scale(0.8)';
-   		alertBox.style.transition = 'transform 0.3s ease';
+		alertBox.style.backgroundColor = 'white';
+		alertBox.style.padding = '20px';
+		alertBox.style.borderRadius = '8px';
+		alertBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+		alertBox.style.width = '350px';
+		alertBox.style.height = '200px';
+		alertBox.style.textAlign = 'center';
+		alertBox.style.fontFamily = '"Varela Round", sans-serif';
+		alertBox.style.transform = 'scale(0.8)';
+		alertBox.style.transition = 'transform 0.3s ease';
+		alertBox.style.display = 'flex';
+		alertBox.style.flexDirection = 'column';
+		alertBox.style.alignItems = 'center';
+		alertBox.style.justifyContent = 'center';
 
    		const alertMessage = document.createElement('p');
    		alertMessage.textContent = message;
@@ -333,14 +338,19 @@
 
         		const promptBox = document.createElement('div');
         		promptBox.style.backgroundColor = 'white';
-        		promptBox.style.padding = '20px';
-        		promptBox.style.borderRadius = '8px';
-        		promptBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-        		promptBox.style.width = '300px';
-        		promptBox.style.textAlign = 'center';
-        		promptBox.style.fontFamily = '"Varela Round", sans-serif';
-        		promptBox.style.transform = 'scale(0.8)';
-        		promptBox.style.transition = 'transform 0.3s ease';
+			promptBox.style.padding = '20px';
+			promptBox.style.borderRadius = '8px';
+			promptBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+			promptBox.style.width = '350px';
+			promptBox.style.height = '200px';
+			promptBox.style.textAlign = 'center';
+			promptBox.style.fontFamily = '"Varela Round", sans-serif';
+			promptBox.style.transform = 'scale(0.8)';
+			promptBox.style.transition = 'transform 0.3s ease';
+			promptBox.style.display = 'flex';
+			promptBox.style.flexDirection = 'column';
+			promptBox.style.alignItems = 'center';
+			promptBox.style.justifyContent = 'center';
 
         		const promptMessage = document.createElement('p');
         		promptMessage.textContent = message;
