@@ -381,12 +381,23 @@
         		okButton.style.fontFamily = '"Varela Round", sans-serif';
 
         		okButton.addEventListener('click', () => {
-            		const value = inputField.value;
-            		overlay.style.opacity = '0';
-            		promptBox.style.transform = 'scale(0.8)';
-            		document.body.style.filter = 'none';
-            		setTimeout(() => document.body.removeChild(overlay), 300);
-            		resolve(value);
+            			const value = inputField.value;
+            			overlay.style.opacity = '0';
+            			promptBox.style.transform = 'scale(0.8)';
+            			document.body.style.filter = 'none';
+            			setTimeout(() => document.body.removeChild(overlay), 300);
+            			resolve(value);
+        		});
+
+			inputField.addEventListener('keydown', (e) => {
+           			 if (e.key === 'Enter') {
+                			const value = inputField.value;
+                			overlay.style.opacity = '0';
+                			promptBox.style.transform = 'scale(0.8)';
+                			document.body.style.filter = 'none';
+                			setTimeout(() => document.body.removeChild(overlay), 300);
+                			resolve(value);
+            			 }
         		});
 
         		promptBox.appendChild(okButton);
