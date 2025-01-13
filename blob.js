@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             alert("uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy");
                         }
                     });
-                }
+                };
             };
             document.body.appendChild(script3);
         };
