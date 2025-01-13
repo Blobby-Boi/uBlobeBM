@@ -308,15 +308,16 @@
         		alertBox.style.transform = 'scale(0.8)';
         		document.body.style.filter = 'none';
         		setTimeout(() => document.body.removeChild(overlay), 300);
-        		document.removeEventListener('keydown', handleKeyPress);
+        		document.removeEventListener('keydown', closeAlertEnter);
     		};
 
     		okButton.addEventListener('click', closeAlert);
-   		document.addEventListener('keydown', (event) => {
+   		function closeAlertEnter(event) {
   			if (event.key === 'Enter') {
     				closeAlert();
   			}
-		});
+		}
+		document.addEventListener('keydown', closeAlertEnter);
 
     		alertBox.appendChild(okButton);
     	 	overlay.appendChild(alertBox);
