@@ -1,5 +1,5 @@
 /// blob.js
-const backupAlert = window.alert;
+var backupAlert = window.alert;
 document.addEventListener('DOMContentLoaded', function () {
     if (window.location.hostname.endsWith('.google.com') && window.location.hostname !== 'www.google.com') {
         window.addEventListener('keydown', function (event) {
