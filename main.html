@@ -153,6 +153,7 @@
 
             addButton.addEventListener('click', () => {
 		async function getBookmarkletName() {
+			addButton.blur();
 			const displayValue = await customPrompt('How do you want the bookmarklet to be called?');
 			console.log('Bookmarklet name:', displayValue);
 			if (displayValue === null) {
