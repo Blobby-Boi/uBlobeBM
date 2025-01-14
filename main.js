@@ -75,6 +75,8 @@ setTimeout(() => {
                 right: 15px;
                 width: 25px;
                 height: 30px;
+                margin: 0px 0px;
+                padding: 0px 0px;
                 transform: translateY(-50%);
                 background: none;
                 border: none;
