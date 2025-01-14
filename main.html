@@ -37,11 +37,13 @@
             max-width: 100px;
             max-height: 50px;
             margin-right: 10px;
+            user-select: none;
         }
 
         #itemListText {
             font-size: 18px;
             font-family: 'Varela Round', sans-serif;
+            user-select: none;
         }
 
         #itemInputContainer {
@@ -51,18 +53,17 @@
         }
 
 	#newItemInput {
-   	    width: calc(100% + 590px);
+   	    width: 210px;
   	    padding: 5px;
 	    border-radius: 5px;
-	    margin-left: -600px;
+	    margin-left: 0;
+      	    font-family: 'Varela Round';
+            user-select: none;
 	}
-
-	@media (max-width: 769px) {
-    		#newItemInput {
-        		width: auto;
-        		margin-left: 0;
-    			}
-		}
+    
+	#newItemInput::placeholder {
+	    text-align: center;
+	}
 
         .item-list-container {
             max-height: calc(100vh - 75px);
@@ -88,6 +89,8 @@
             padding: 5px 10px;
             border: none;
             cursor: pointer;
+            font-family: 'Varela Round';
+            user-select: none;
         }
 
         .remove-button {
@@ -97,6 +100,8 @@
             border: none;
             cursor: pointer;
             margin-left: 10px;
+            font-family: 'Varela Round';
+            user-select: none;
         }
 
         .edit-display-button, .edit-item-button {
@@ -106,6 +111,8 @@
             border: none;
             cursor: pointer;
             margin-left: 5px;
+            font-family: 'Varela Round';
+            user-select: none;
         }
 
         #addItemButton {
@@ -114,6 +121,8 @@
             padding: 5px 10px;
             border: none;
             cursor: pointer;
+            font-family: 'Varela Round';
+            user-select: none;
         }
 
         .overlay {
@@ -137,7 +146,7 @@
             <span id="itemListText">uBlobeBM: Bookmarklet Executor</span>
         </div>
         <div id="itemInputContainer">
-            <input type="text" id="newItemInput" placeholder="Enter the bookmarklet here">
+            <input type="text" id="newItemInput" placeholder="Enter the bookmarklet code here">
             <button id="addItemButton">Add Bookmarklet</button>
         </div>
     </div>
@@ -300,6 +309,7 @@
     	 	alertMessage.style.margin = '0 0 20px';
     	 	alertMessage.style.fontSize = '20px';
     	 	alertMessage.style.color = '#333';
+                alertMessage.style.userSelect = 'none';
     	 	alertBox.appendChild(alertMessage);
 
     	 	const okButton = document.createElement('button');
@@ -310,7 +320,8 @@
     	 	okButton.style.backgroundColor = 'green';
     	 	okButton.style.color = 'white';
     	 	okButton.style.cursor = 'pointer';
-            	okButton.style.fontFamily = '"Varela Round", sans-serif';
+                okButton.style.fontFamily = '"Varela Round", sans-serif';
+                okButton.style.userSelect = 'none';
 
     	 	const closeAlert = () => {
        			overlay.style.opacity = '0';
@@ -375,6 +386,7 @@
         		promptMessage.style.margin = '0 0 20px';
         		promptMessage.style.fontSize = '20px';
         		promptMessage.style.color = '#333';
+                        promptMessage.style.userSelect = 'none';
         		promptBox.appendChild(promptMessage);
 
         		const inputField = document.createElement('input');
@@ -397,6 +409,7 @@
         		okButton.style.color = 'white';
         		okButton.style.cursor = 'pointer';
         		okButton.style.fontFamily = '"Varela Round", sans-serif';
+                        okButton.style.userSelect = 'none';
 
         		okButton.addEventListener('click', () => {
             			const value = inputField.value;
