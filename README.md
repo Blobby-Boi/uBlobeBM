@@ -1,6 +1,6 @@
 # Welcome to uBlobeBM (BlobeBM uBlock Edition)!
 
-**uBlobeBM** is a tool that can run bookmarklets using **uBlock Origin**. It's very useful if bookmarklets don’t work on your device or are blocked by your administrator. It also works in a much bigger range of sites (which includes Blooket) than regular **uBlock Run** or **uRun** do. This is done with some CSP bypassing shenanigans.
+**uBlobeBM** is a tool that can run bookmarklets using **uBlock Origin**. It's very useful if bookmarklets don’t work on your device or are blocked by your administrator. It also works in a lot of sites (e.g. Blooket) in which regular **uBlock Run** or **uRun** don't. This was achieved by doing some CSP bypassing shenanigans.
 
 ---
 
