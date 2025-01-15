@@ -46,6 +46,6 @@
      - **Red button**: Remove the bookmarklet.  
      - **Yellow buttons**: Edit the bookmarklet's name and code.
        
-   You might come across a website where uBlobeBM complety fails to load on (such as **Github** or **Any Google Subdomain**). This occurs because they have a strong **Content Security Policy** that can't be bypassed easily, though there are **very few** of them.
+   You might come across a website where uBlobeBM complety fails to load on (such as **Github** or any **Google Subdomain**). This occurs because they have a strong **Content Security Policy** that can't be bypassed easily, though there are very few of them.
 ---
 I hope this helps! :)
