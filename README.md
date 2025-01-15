@@ -6,7 +6,7 @@
 
 ## **How to Setup uBlobeBM**
 
-1. **Install uBlock Origin**  
+1. **Installing uBlock Origin**  
    Make sure you have **uBlock Origin** installed on your computer. If you don't, download it [here](https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm).
 
 2. **Modifying Advanced Settings**  
