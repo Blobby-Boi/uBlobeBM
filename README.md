@@ -29,7 +29,7 @@
 ## **How to use uBlobeBM**
 1. **Opening uBlobeBM**  
    - Press `CTRL + Shift + ~` to open uBlobeBM.
-   - If you are warned that the website you are running it on has a strong Content Security Policy, it means that some bookmarklets will not work as expected. Those are mainly the ones that create a script referencing an external source.
+   - If you are warned that the website you are running it on has a strong **Content Security Policy**, it means that some bookmarklets will not work as expected. Those are mainly the ones that create a script referencing an **external source**.
 
 2. **Adding Bookmarklets**  
    - Locate the **"Enter bookmarklet code here"** text input.  
@@ -46,6 +46,6 @@
      - **Red button**: Remove the bookmarklet.  
      - **Yellow buttons**: Edit the bookmarklet's name and code.
        
-   You might come across a website where uBlobeBM complety fails to load on (such as Github or Google Subdomains). This occurs because they have a strong Content Security Policy    that can't be bypassed easily, though there are very few of them.
+   You might come across a website where uBlobeBM complety fails to load on (such as **Github** or **Any Google Subdomain**). This occurs because they have a strong **Content Security Policy** that can't be bypassed easily, though there are **very few** of them.
 ---
 I hope this helps! :)
