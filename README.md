@@ -47,7 +47,7 @@
    - You can add as many bookmarklets as you need into uBlobeBM.
    - The bookmarklets will save even if you close the window or shut down your device.
 
-   You might come across a website where uBlobeBM complety fails to load on (such as Github or Google Subdomains). This occurs because they have a strong Content Security Policy that can't be bypassed easily, though there are very few of these.
+   You might come across a website where uBlobeBM complety fails to load on (such as Github or Google Subdomains). This occurs because they have a strong Content Security Policy that can't be bypassed easily, though there are very few of them.
 ---
 
 I hope this helps! :)
