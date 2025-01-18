@@ -187,21 +187,21 @@
             });
 
 async function getublobelocalstorage(key) {
-    const popup = window.open('https://ublobebm.github.io/localstorage.html', 'ublobebmPopup', 'width=10,height=10');
+    const localstorageWindow = window.open('https://ublobebm.github.io/localstorage.html', 'localstorageWindow', 'width=10,height=10');
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            popup.postMessage({ action: 'get', key: key }, '*');
+            localstorageWindow.postMessage({ action: 'get', key: key }, '*');
 
             window.addEventListener('message', function handler(event) {
-                if (event.source === popup && event.data) {
+                if (event.source === localstorageWindow && event.data) {
                     if (event.data.status === 'success') {
                         window.removeEventListener('message', handler);
                         resolve(event.data.value);
-                        popup.close();
+                        localstorageWindow.close();
                     } else {
                         window.removeEventListener('message', handler);
                         reject(new Error('Failed to get localStorage value.'));
-                        popup.close();
+                        localstorageWindow.close();
                     }
                 }
             });
@@ -210,21 +210,21 @@ async function getublobelocalstorage(key) {
 }
 
 async function setublobelocalstorage(key, value) {
-    const popup = window.open('https://ublobebm.github.io/localstorage.html', 'ublobebmPopup', 'width=10,height=10');
+    const localstorageWindow = window.open('https://ublobebm.github.io/localstorage.html', 'localstorageWindow', 'width=10,height=10');
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            popup.postMessage({ action: 'set', key: key, value: value }, '*');
+            localstorageWindow.postMessage({ action: 'set', key: key, value: value }, '*');
 
             window.addEventListener('message', function handler(event) {
-                if (event.source === popup && event.data) {
+                if (event.source === localstorageWindow && event.data) {
                     if (event.data.status === 'success') {
                         window.removeEventListener('message', handler);
                         resolve(event.data.message);
-                        popup.close();
+                        localstorageWindow.close();
                     } else {
                         window.removeEventListener('message', handler);
                         reject(new Error('Failed to set localStorage value.'));
-                        popup.close();
+                        localstorageWindow.close();
                     }
                 }
             });
