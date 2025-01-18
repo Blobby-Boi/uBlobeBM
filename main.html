@@ -187,21 +187,26 @@
             });
 
 async function getublobelocalstorage(key) {
-    const popup = window.open('https://ublobebm.github.io/localstorage.html', 'ublobebmPopup', 'width=10,height=10');
-    return new Promise((resolve, reject) => {
+	const iframe = document.createElement('iframe');
+	iframe.src = 'https://ublobebm.github.io/localstorage.html';
+	iframe.style.width = '600px';
+	iframe.style.height = '400px';
+	iframe.style.border = 'none';
+	document.body.appendChild(iframe);
+	return new Promise((resolve, reject) => {
         setTimeout(() => {
-            popup.postMessage({ action: 'get', key: key }, '*');
+            iframe.contentWindow.postMessage({ action: 'get', key: key }, '*');
 
             window.addEventListener('message', function handler(event) {
-                if (event.source === popup && event.data) {
+                if (event.source === iframe.contentWindow && event.data) {
                     if (event.data.status === 'success') {
                         window.removeEventListener('message', handler);
                         resolve(event.data.value);
-                        popup.close();
+			document.body.removeChild(iframe);
                     } else {
                         window.removeEventListener('message', handler);
                         reject(new Error('Failed to get localStorage value.'));
-                        popup.close();
+			document.body.removeChild(iframe);
                     }
                 }
             });
@@ -210,21 +215,26 @@ async function getublobelocalstorage(key) {
 }
 
 async function setublobelocalstorage(key, value) {
-    const popup = window.open('https://ublobebm.github.io/localstorage.html', 'ublobebmPopup', 'width=10,height=10');
-    return new Promise((resolve, reject) => {
+	const iframe = document.createElement('iframe');
+	iframe.src = 'https://ublobebm.github.io/localstorage.html';
+	iframe.style.width = '600px';
+	iframe.style.height = '400px';
+	iframe.style.border = 'none';
+	document.body.appendChild(iframe);
+	return new Promise((resolve, reject) => {
         setTimeout(() => {
-            popup.postMessage({ action: 'set', key: key, value: value }, '*');
+            iframe.contentWindow.postMessage({ action: 'set', key: key, value: value }, '*');
 
             window.addEventListener('message', function handler(event) {
-                if (event.source === popup && event.data) {
+                if (event.source === iframe.contentWindow && event.data) {
                     if (event.data.status === 'success') {
                         window.removeEventListener('message', handler);
                         resolve(event.data.message);
-                        popup.close();
+			document.body.removeChild(iframe);
                     } else {
                         window.removeEventListener('message', handler);
                         reject(new Error('Failed to set localStorage value.'));
-                        popup.close();
+			document.body.removeChild(iframe);
                     }
                 }
             });
