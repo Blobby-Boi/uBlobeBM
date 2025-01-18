@@ -1,4 +1,5 @@
 /// e.js
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('mousedown', function () {
   window.open();
+  window.open("https://example.com");
 });
