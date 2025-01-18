@@ -321,7 +321,7 @@ async function setublobelocalstorage(key, value) {
             }
 		
 		function handleKeyDown(event) {
-       			if (event.ctrlKey && event.shiftKey && event.key === '~') {
+       			if (event.ctrlKey && event.which === 192) {
             			getItems();
             			document.removeEventListener('keydown', handleKeyDown);
         		}
