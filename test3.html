@@ -231,17 +231,8 @@ async function setublobelocalstorage(key, value) {
         }, 500);
     });
 }
-
-async function fetchLocalStorageValue() {
-    try {
-        var a = await getublobelocalstorage("testing");
-        alert('Value from localStorage: ' + a);
-    } catch (error) {
-        alert('Error fetching value: ' + error.message);
-    }
-}
           
-            function addItemToList(displayValue, itemValue) {
+            async function addItemToList(displayValue, itemValue) {
                 const newItem = document.createElement('li');
                 newItem.className = 'item';
 
@@ -301,7 +292,7 @@ async function fetchLocalStorageValue() {
                 itemList.appendChild(newItem);
             }
 
-            function saveItemsToLocalStorage() {
+            async function saveItemsToLocalStorage() {
                 const items = Array.from(document.querySelectorAll('.item-button')).map(button => {
                     return {
                         display: button.textContent,
@@ -318,14 +309,17 @@ async function fetchLocalStorageValue() {
 			window.parent.postMessage("run:" + selectedItemValue, '*');
                 }, 500);
             }
-
-            const storedItems = await getublobelocalstorage("items");
+		
+	async function getItems() {
+                const storedItems = await getublobelocalstorage("items");
             if (storedItems) {
                 const parsedItems = JSON.parse(storedItems);
                 parsedItems.forEach(item => {
                     addItemToList(item.display, item.item);
                 });
+            	}
             }
+	getItems();
         });
         
       function customAlert(message) {
