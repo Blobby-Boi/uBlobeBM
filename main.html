@@ -319,7 +319,14 @@ async function setublobelocalstorage(key, value) {
                 });
             	}
             }
-	getItems();
+		
+		function handleKeyDown(event) {
+       			if (event.ctrlKey && event.shiftKey && event.key === '~') {
+            			getItems();
+            			document.removeEventListener('keydown', handleKeyDown);
+        		}
+    		}
+		document.addEventListener('keydown', handleKeyDown);
         });
         
       function customAlert(message) {
