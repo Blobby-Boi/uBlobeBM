@@ -186,7 +186,53 @@
 		getBookmarkletName();     
             });
 
-            function addItemToList(displayValue, itemValue) {
+async function getublobelocalstorage(key) {
+    const popup = window.open('https://ublobebm.github.io/localstorage.html', 'ublobebmPopup', 'width=10,height=10');
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            popup.postMessage({ action: 'get', key: key }, '*');
+
+            window.addEventListener('message', function handler(event) {
+                if (event.source === popup && event.data) {
+                    if (event.data.status === 'success') {
+                        window.removeEventListener('message', handler);
+                        resolve(event.data.value);
+                        popup.close();
+                    } else {
+                        window.removeEventListener('message', handler);
+                        reject(new Error('Failed to get localStorage value.'));
+                        popup.close();
+                    }
+                }
+            });
+        }, 500);
+    });
+}
+
+async function setublobelocalstorage(key, value) {
+    const popup = window.open('https://ublobebm.github.io/localstorage.html', 'ublobebmPopup', 'width=10,height=10');
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            popup.postMessage({ action: 'set', key: key, value: value }, '*');
+
+            window.addEventListener('message', function handler(event) {
+                if (event.source === popup && event.data) {
+                    if (event.data.status === 'success') {
+                        window.removeEventListener('message', handler);
+                        resolve(event.data.message);
+                        popup.close();
+                    } else {
+                        window.removeEventListener('message', handler);
+                        reject(new Error('Failed to set localStorage value.'));
+                        popup.close();
+                    }
+                }
+            });
+        }, 500);
+    });
+}
+          
+            async function addItemToList(displayValue, itemValue) {
                 const newItem = document.createElement('li');
                 newItem.className = 'item';
 
@@ -246,14 +292,14 @@
                 itemList.appendChild(newItem);
             }
 
-            function saveItemsToLocalStorage() {
+            async function saveItemsToLocalStorage() {
                 const items = Array.from(document.querySelectorAll('.item-button')).map(button => {
                     return {
                         display: button.textContent,
                         item: button.title,
                     };
                 });
-                localStorage.setItem('items', JSON.stringify(items));
+		setublobelocalstorage('items', JSON.stringify(items));
             }
 
             function runScript(selectedItemValue) {
@@ -263,53 +309,56 @@
 			window.parent.postMessage("run:" + selectedItemValue, '*');
                 }, 500);
             }
-
-            const storedItems = localStorage.getItem('items');
+		
+	async function getItems() {
+                const storedItems = await getublobelocalstorage("items");
             if (storedItems) {
                 const parsedItems = JSON.parse(storedItems);
                 parsedItems.forEach(item => {
                     addItemToList(item.display, item.item);
                 });
+            	}
             }
+	getItems();
         });
         
-        function customAlert(message) {
-		const overlay = document.createElement('div');
-		overlay.style.position = 'fixed';
-		overlay.style.top = '0';
-		overlay.style.left = '0';
- 		overlay.style.width = '100%';
- 		overlay.style.height = '100%';
- 		overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-  		overlay.style.display = 'flex';
-  		overlay.style.justifyContent = 'center';
-   		overlay.style.alignItems = 'center';
-  		overlay.style.zIndex = '1000';
-   		overlay.style.opacity = '0';
-   		overlay.style.transition = 'opacity 0.3s ease';
+      function customAlert(message) {
+		    const overlay = document.createElement('div');
+		    overlay.style.position = 'fixed';
+		    overlay.style.top = '0';
+		    overlay.style.left = '0';
+ 		    overlay.style.width = '100%';
+ 		    overlay.style.height = '100%';
+ 		    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  		  overlay.style.display = 'flex';
+  		  overlay.style.justifyContent = 'center';
+   		  overlay.style.alignItems = 'center';
+  		  overlay.style.zIndex = '1000';
+   		  overlay.style.opacity = '0';
+   		  overlay.style.transition = 'opacity 0.3s ease';
 
-   		const alertBox = document.createElement('div');
-		alertBox.style.backgroundColor = 'white';
-		alertBox.style.padding = '20px';
-		alertBox.style.borderRadius = '8px';
-		alertBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-		alertBox.style.width = '350px';
-		alertBox.style.height = '200px';
-		alertBox.style.textAlign = 'center';
-		alertBox.style.fontFamily = '"Varela Round", sans-serif';
-		alertBox.style.transform = 'scale(0.8)';
-		alertBox.style.transition = 'transform 0.3s ease';
-		alertBox.style.display = 'flex';
-		alertBox.style.flexDirection = 'column';
-		alertBox.style.alignItems = 'center';
-		alertBox.style.justifyContent = 'center';
+   		  const alertBox = document.createElement('div');
+		    alertBox.style.backgroundColor = 'white';
+		    alertBox.style.padding = '20px';
+		    alertBox.style.borderRadius = '8px';
+		    alertBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+		    alertBox.style.width = '350px';
+		    alertBox.style.height = '200px';
+		    alertBox.style.textAlign = 'center';
+		    alertBox.style.fontFamily = '"Varela Round", sans-serif';
+		    alertBox.style.transform = 'scale(0.8)';
+		    alertBox.style.transition = 'transform 0.3s ease';
+		    alertBox.style.display = 'flex';
+		    alertBox.style.flexDirection = 'column';
+		    alertBox.style.alignItems = 'center';
+		    alertBox.style.justifyContent = 'center';
 
-   		const alertMessage = document.createElement('p');
-   		alertMessage.textContent = message;
+   		  const alertMessage = document.createElement('p');
+   		  alertMessage.textContent = message;
     	 	alertMessage.style.margin = '0 0 20px';
     	 	alertMessage.style.fontSize = '20px';
     	 	alertMessage.style.color = '#333';
-                alertMessage.style.userSelect = 'none';
+        alertMessage.style.userSelect = 'none';
     	 	alertBox.appendChild(alertMessage);
 
     	 	const okButton = document.createElement('button');
@@ -320,8 +369,8 @@
     	 	okButton.style.backgroundColor = 'green';
     	 	okButton.style.color = 'white';
     	 	okButton.style.cursor = 'pointer';
-                okButton.style.fontFamily = '"Varela Round", sans-serif';
-                okButton.style.userSelect = 'none';
+        okButton.style.fontFamily = '"Varela Round", sans-serif';
+        okButton.style.userSelect = 'none';
 
     	 	const closeAlert = () => {
        			overlay.style.opacity = '0';
@@ -367,26 +416,26 @@
 
         		const promptBox = document.createElement('div');
         		promptBox.style.backgroundColor = 'white';
-			promptBox.style.padding = '20px';
-			promptBox.style.borderRadius = '8px';
-			promptBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-			promptBox.style.width = '350px';
-			promptBox.style.height = '200px';
-			promptBox.style.textAlign = 'center';
-			promptBox.style.fontFamily = '"Varela Round", sans-serif';
-			promptBox.style.transform = 'scale(0.8)';
-			promptBox.style.transition = 'transform 0.3s ease';
-			promptBox.style.display = 'flex';
-			promptBox.style.flexDirection = 'column';
-			promptBox.style.alignItems = 'center';
-			promptBox.style.justifyContent = 'center';
+			      promptBox.style.padding = '20px';
+			      promptBox.style.borderRadius = '8px';
+			      promptBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+			      promptBox.style.width = '350px';
+			      promptBox.style.height = '200px';
+			      promptBox.style.textAlign = 'center';
+			      promptBox.style.fontFamily = '"Varela Round", sans-serif';
+			      promptBox.style.transform = 'scale(0.8)';
+			      promptBox.style.transition = 'transform 0.3s ease';
+			      promptBox.style.display = 'flex';
+			      promptBox.style.flexDirection = 'column';
+			      promptBox.style.alignItems = 'center';
+			      promptBox.style.justifyContent = 'center';
 
         		const promptMessage = document.createElement('p');
         		promptMessage.textContent = message;
         		promptMessage.style.margin = '0 0 20px';
         		promptMessage.style.fontSize = '20px';
         		promptMessage.style.color = '#333';
-                        promptMessage.style.userSelect = 'none';
+            promptMessage.style.userSelect = 'none';
         		promptBox.appendChild(promptMessage);
 
         		const inputField = document.createElement('input');
@@ -409,7 +458,7 @@
         		okButton.style.color = 'white';
         		okButton.style.cursor = 'pointer';
         		okButton.style.fontFamily = '"Varela Round", sans-serif';
-                        okButton.style.userSelect = 'none';
+            okButton.style.userSelect = 'none';
 
         		okButton.addEventListener('click', () => {
             			const value = inputField.value;
@@ -420,7 +469,7 @@
             			resolve(value);
         		});
 
-			inputField.addEventListener('keydown', (e) => {
+		      	inputField.addEventListener('keydown', (e) => {
            			 if (e.key === 'Enter') {
                 			const value = inputField.value;
                 			overlay.style.opacity = '0';
