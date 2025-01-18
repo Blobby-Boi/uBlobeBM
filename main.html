@@ -158,34 +158,6 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            let updatedItemText;
-            const itemList = document.getElementById('itemList');
-            const newItemInput = document.getElementById('newItemInput');
-            const addButton = document.getElementById('addItemButton');
-            const overlay = document.getElementById('overlay');
-
-            addButton.addEventListener('click', () => {
-		async function getBookmarkletName() {
-			addButton.blur();
-			const displayValue = await customPrompt('How do you want the bookmarklet to be called?');
-			console.log('Bookmarklet name:', displayValue);
-			if (displayValue === null) {
- 		               return;
-  			}
-
-                	const itemValue = newItemInput.value.trim();
-                	if (!itemValue) {
-               			return;
-                	}
-
-                	addItemToList(displayValue, itemValue);
-                	saveItemsToLocalStorage();
-                	newItemInput.value = '';
-		}
-		getBookmarkletName();     
-            });
-
 async function getublobelocalstorage(key) {
     const localstorageWindow = window.open('https://ublobebm.github.io/localstorage.html', 'localstorageWindow', 'width=10,height=10,top=100000,left=100000,status=no,scrollbars=no');
     return new Promise((resolve, reject) => {
@@ -231,6 +203,52 @@ async function setublobelocalstorage(key, value) {
         }, 500);
     });
 }
+	    
+	async function getItems() {
+        	const storedItems = await getublobelocalstorage("items");
+        	if (storedItems) {
+                	const parsedItems = JSON.parse(storedItems);
+                	parsedItems.forEach(item => {
+                    	addItemToList(item.display, item.item);
+                	});
+        	}
+	}
+	
+	function handleKeyDown(event) {
+       		if (event.ctrlKey && event.which === 192) {
+            		getItems();
+            		document.removeEventListener('keydown', handleKeyDown);
+        	}
+	}
+	    
+	document.addEventListener('keydown', handleKeyDown);  
+        document.addEventListener('DOMContentLoaded', () => {
+            let updatedItemText;
+            const itemList = document.getElementById('itemList');
+            const newItemInput = document.getElementById('newItemInput');
+            const addButton = document.getElementById('addItemButton');
+            const overlay = document.getElementById('overlay');
+
+            addButton.addEventListener('click', () => {
+		async function getBookmarkletName() {
+			addButton.blur();
+			const displayValue = await customPrompt('How do you want the bookmarklet to be called?');
+			console.log('Bookmarklet name:', displayValue);
+			if (displayValue === null) {
+ 		               return;
+  			}
+
+                	const itemValue = newItemInput.value.trim();
+                	if (!itemValue) {
+               			return;
+                	}
+
+                	addItemToList(displayValue, itemValue);
+                	saveItemsToLocalStorage();
+                	newItemInput.value = '';
+		}
+		getBookmarkletName();     
+            });
           
             async function addItemToList(displayValue, itemValue) {
                 const newItem = document.createElement('li');
@@ -309,24 +327,6 @@ async function setublobelocalstorage(key, value) {
 			window.parent.postMessage("run:" + selectedItemValue, '*');
                 }, 500);
             }
-		
-	async function getItems() {
-                const storedItems = await getublobelocalstorage("items");
-            if (storedItems) {
-                const parsedItems = JSON.parse(storedItems);
-                parsedItems.forEach(item => {
-                    addItemToList(item.display, item.item);
-                });
-            	}
-            }
-		
-		function handleKeyDown(event) {
-       			if (event.ctrlKey && event.which === 192) {
-            			getItems();
-            			document.removeEventListener('keydown', handleKeyDown);
-        		}
-    		}
-		document.addEventListener('keydown', handleKeyDown);
         });
         
       function customAlert(message) {
