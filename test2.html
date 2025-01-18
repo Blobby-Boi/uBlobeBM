@@ -308,7 +308,7 @@ async function fetchLocalStorageValue() {
                         item: button.title,
                     };
                 });
-                localStorage.setItem('items', JSON.stringify(items));
+		setublobelocalstorage('items', JSON.stringify(items));
             }
 
             function runScript(selectedItemValue) {
@@ -319,7 +319,7 @@ async function fetchLocalStorageValue() {
                 }, 500);
             }
 
-            const storedItems = localStorage.getItem('items');
+            const storedItems = await getublobelocalstorage("items");
             if (storedItems) {
                 const parsedItems = JSON.parse(storedItems);
                 parsedItems.forEach(item => {
