@@ -187,26 +187,21 @@
             });
 
 async function getublobelocalstorage(key) {
-	const iframe = document.createElement('iframe');
-	iframe.src = 'https://ublobebm.github.io/localstorage.html';
-	iframe.style.width = '600px';
-	iframe.style.height = '400px';
-	iframe.style.border = 'none';
-	document.body.appendChild(iframe);
-	return new Promise((resolve, reject) => {
+    const localstorageWindow = window.open('https://ublobebm.github.io/localstorage.html', 'localstorageWindow', 'width=10,height=10,top=100000,left=100000,status=no,scrollbars=no');
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
-            iframe.contentWindow.postMessage({ action: 'get', key: key }, '*');
+            localstorageWindow.postMessage({ action: 'get', key: key }, '*');
 
             window.addEventListener('message', function handler(event) {
-                if (event.source === iframe.contentWindow && event.data) {
+                if (event.source === localstorageWindow && event.data) {
                     if (event.data.status === 'success') {
                         window.removeEventListener('message', handler);
                         resolve(event.data.value);
-			document.body.removeChild(iframe);
+                        localstorageWindow.close();
                     } else {
                         window.removeEventListener('message', handler);
                         reject(new Error('Failed to get localStorage value.'));
-			document.body.removeChild(iframe);
+                        localstorageWindow.close();
                     }
                 }
             });
@@ -215,26 +210,21 @@ async function getublobelocalstorage(key) {
 }
 
 async function setublobelocalstorage(key, value) {
-	const iframe = document.createElement('iframe');
-	iframe.src = 'https://ublobebm.github.io/localstorage.html';
-	iframe.style.width = '600px';
-	iframe.style.height = '400px';
-	iframe.style.border = 'none';
-	document.body.appendChild(iframe);
-	return new Promise((resolve, reject) => {
+    const localstorageWindow = window.open('https://ublobebm.github.io/localstorage.html', 'localstorageWindow', 'width=10,height=10,top=100000,left=100000,status=no,scrollbars=no');
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
-            iframe.contentWindow.postMessage({ action: 'set', key: key, value: value }, '*');
+            localstorageWindow.postMessage({ action: 'set', key: key, value: value }, '*');
 
             window.addEventListener('message', function handler(event) {
-                if (event.source === iframe.contentWindow && event.data) {
+                if (event.source === localstorageWindow && event.data) {
                     if (event.data.status === 'success') {
                         window.removeEventListener('message', handler);
                         resolve(event.data.message);
-			document.body.removeChild(iframe);
+                        localstorageWindow.close();
                     } else {
                         window.removeEventListener('message', handler);
                         reject(new Error('Failed to set localStorage value.'));
-			document.body.removeChild(iframe);
+                        localstorageWindow.close();
                     }
                 }
             });
