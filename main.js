@@ -159,9 +159,9 @@ setTimeout(() => {
             
             setTimeout(() => {
                 isOpening = false;
-                fetchItems();
             }, 300);
-            
+
+            fetchItems();
             window.addEventListener("message", handleMessage);
         }
     });
