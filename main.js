@@ -9,6 +9,41 @@ setTimeout(() => {
     let isOpening = false;
     let isClosing = false;
     
+    async function getublobelocalstorage(key) {
+        const localstorageWindow = window.open('https://ublobebm.github.io/localstorage.html', 'localstorageWindow', 'width=10,height=10,top=100000,left=100000,scrollbars=no');
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                localstorageWindow.postMessage({ action: 'get', key: key }, '*');
+
+                window.addEventListener('message', function handler(event) {
+                    if (event.source === localstorageWindow && event.data) {
+                        if (event.data.status === 'success') {
+                            window.removeEventListener('message', handler);
+                            resolve(event.data.value);
+                            localstorageWindow.close();
+                        } else {
+                            window.removeEventListener('message', handler);
+                            reject(new Error('Failed to get localStorage value.'));
+                            localstorageWindow.close();
+                        }
+                    }
+                });
+            }, 500);
+        });
+    }
+
+    		
+	async function fetchItems() {
+        const fetchedItems = await getublobelocalstorage("items");
+        if (fetchedItems) {
+            const message = {
+                name: "Items",
+                items: fetchedItems
+            };
+            blobFrame.postMessage(fetchedItems);
+        }
+    }
+    
     document.addEventListener("keydown", function (blob) {
         if (blob.key == "~" && blob.ctrlKey && !blobFrame && !isClosing) {
             isOpening = true;            
@@ -125,6 +160,7 @@ setTimeout(() => {
             
             setTimeout(() => {
                 isOpening = false;
+                fetchItems();
             }, 300);
             
             window.addEventListener("message", handleMessage);
