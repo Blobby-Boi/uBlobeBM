@@ -15,26 +15,28 @@ setTimeout(() => {
       	    localstorageWindow.close();
  	    });
         return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                localstorageWindow.postMessage({ action: 'get', key: key }, '*');
+            window.addEventListener('message', function loadcheck(event) {
+                if (event.source === localstorageWindow) {
+                    window.removeEventListener('message', loadcheck);
+                    localstorageWindow.postMessage({ action: 'get', key: key }, '*');
 
-                window.addEventListener('message', function handler(event) {
-                    if (event.source === localstorageWindow && event.data) {
-                        if (event.data.status === 'success') {
-                            window.removeEventListener('message', handler);
-                            resolve(event.data.value);
-                            localstorageWindow.close();
-                        } else {
-                            window.removeEventListener('message', handler);
-                            localstorageWindow.close();
-                            reject(new Error('Failed to get localStorage value.'));
+                    window.addEventListener('message', function handler(event) {
+                        if (event.source === localstorageWindow && event.data) {
+                            if (event.data.status === 'success') {
+                                window.removeEventListener('message', handler);
+                                resolve(event.data.value);
+                                localstorageWindow.close();
+                            } else {
+                                window.removeEventListener('message', handler);
+                                localstorageWindow.close();
+                                reject(new Error('Failed to get localStorage value.'));
+                            }
                         }
-                    }
-                });
-            }, 500);
+                    });
+                }
+            });
         });
     }
-
     		
     async function fetchItems() {
         const fetchedItems = await getublobelocalstorage("items");
