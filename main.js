@@ -20,6 +20,18 @@ setTimeout(() => {
                     window.removeEventListener('message', loadcheck);
                     localstorageWindow.postMessage({ action: 'get', key: key }, '*');
 
+                    function checkPopup() {
+                        if (!window.localstorageWindow && window.localstorageWindow.closed) {
+                            try {
+                                const value = localStorage.getItem(key);
+                                resolve(value);
+                            } catch (error) {
+                                reject(new Error('Failed to access localStorage.'));
+                            }
+                        }
+                    }
+                    var checkInterval = setInterval(checkPopup, 10);
+
                     window.addEventListener('message', function handler(event) {
                         if (event.source === localstorageWindow && event.data) {
                             clearInterval(checkInterval);
@@ -34,17 +46,6 @@ setTimeout(() => {
                             }
                         }
                     });
-                    function checkPopup() {
-                        if (!window.localstorageWindow && window.localstorageWindow.closed) {
-                            try {
-                                const value = localStorage.getItem(key);
-                                resolve(value);
-                            } catch (error) {
-                                reject(new Error('Failed to access localStorage.'));
-                            }
-                        }
-                    }
-                    const checkInterval = setInterval(checkPopup, 10);
                 }
             });
         });
