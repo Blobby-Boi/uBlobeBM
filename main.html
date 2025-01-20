@@ -196,6 +196,18 @@ async function setublobelocalstorage(key, value) {
             if (event.source === localstorageWindow) {
 		window.removeEventListener('message', loadcheck);
 		localstorageWindow.postMessage({ action: 'set', key: key, value: value }, '*');
+
+                function checkPopup() {
+                    if (!window.localstorageWindow && window.localstorageWindow.closed) {
+                        try {
+                            localStorage.setItem(key, value);
+                            resolve();
+                        } catch (error) {
+                            reject(new Error('Failed to access localStorage.'));
+                        }
+                    }
+                }
+                var checkInterval = setInterval(checkPopup, 10);
 		    
             	window.addEventListener('message', function handler(event) {
                     if (event.source === localstorageWindow && event.data) {
