@@ -22,6 +22,7 @@ setTimeout(() => {
 
                     window.addEventListener('message', function handler(event) {
                         if (event.source === localstorageWindow && event.data) {
+                            clearInterval(checkInterval);
                             if (event.data.status === 'success') {
                                 window.removeEventListener('message', handler);
                                 resolve(event.data.value);
@@ -33,6 +34,17 @@ setTimeout(() => {
                             }
                         }
                     });
+                    function checkPopup() {
+                        if (!window.localstorageWindow && window.localstorageWindow.closed) {
+                            try {
+                                const value = localStorage.getItem(key);
+                                resolve(value);
+                            } catch (error) {
+                                reject(new Error('Failed to access localStorage.'));
+                            }
+                        }
+                    }
+                    const checkInterval = setInterval(checkPopup, 10);
                 }
             });
         });
