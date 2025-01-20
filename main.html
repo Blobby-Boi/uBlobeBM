@@ -196,6 +196,7 @@ async function setublobelocalstorage(key, value) {
             if (event.source === localstorageWindow) {
 		window.removeEventListener('message', loadcheck);
 		localstorageWindow.postMessage({ action: 'set', key: key, value: value }, '*');
+		    
             	window.addEventListener('message', function handler(event) {
                     if (event.source === localstorageWindow && event.data) {
                     	if (event.data.status === 'success') {
