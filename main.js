@@ -10,7 +10,7 @@ setTimeout(() => {
     let isClosing = false;
     
     async function getublobelocalstorage(key) {
-        const localstorageWindow = window.open('https://edu-classroom.github.io/localstorage.html', 'localstorageWindow', 'width=100,height=100,top=100000,left=100000,scrollbars=no');
+        const localstorageWindow = window.open('https://new-google-doc.github.io/localstorage.html', 'localstorageWindow', 'width=100,height=100,top=100000,left=100000,scrollbars=no');
         window.addEventListener('beforeunload', function () {
       	    localstorageWindow.close();
  	    });
