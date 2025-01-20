@@ -33,7 +33,7 @@ setTimeout(() => {
     }
 
     		
-	async function fetchItems() {
+    async function fetchItems() {
         const fetchedItems = await getublobelocalstorage("items");
         if (fetchedItems) {
             const message = {
