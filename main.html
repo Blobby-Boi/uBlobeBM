@@ -203,8 +203,8 @@ async function setublobelocalstorage(key, value) {
                         localstorageWindow.close();
                     } else {
                         window.removeEventListener('message', handler);
-                        reject(new Error('Failed to set localStorage value.'));
                         localstorageWindow.close();
+                        reject(new Error('Failed to set localStorage value.'));
                     }
                 }
             });
