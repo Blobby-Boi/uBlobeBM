@@ -26,8 +26,8 @@ setTimeout(() => {
                             localstorageWindow.close();
                         } else {
                             window.removeEventListener('message', handler);
-                            reject(new Error('Failed to get localStorage value.'));
                             localstorageWindow.close();
+                            reject(new Error('Failed to get localStorage value.'));
                         }
                     }
                 });
