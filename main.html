@@ -210,12 +210,10 @@ async function setublobelocalstorage(key, value) {
 }
 
 	window.addEventListener('message', function(event) {
-  		if (event.data.name === 'items') {
-			const parsedItems = JSON.parse(event.data.content);
-                	parsedItems.forEach(item => {
-                    		addItemToList(item.display, item.item);
-                	});
-  		}
+		const parsedItems = JSON.parse(event.data.content);
+                parsedItems.forEach(item => {
+                    	addItemToList(item.display, item.item);
+                });
 	});
 		
             async function addItemToList(displayValue, itemValue) {
