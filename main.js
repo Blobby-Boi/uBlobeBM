@@ -40,7 +40,7 @@ setTimeout(() => {
                 name: "items",
                 items: fetchedItems
             };
-            blobFrame.postMessage(fetchedItems);
+            blobFrame.contentWindow.postMessage(message);
         }
     }
     
