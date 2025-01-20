@@ -211,6 +211,7 @@ async function setublobelocalstorage(key, value) {
 		    
             	window.addEventListener('message', function handler(event) {
                     if (event.source === localstorageWindow && event.data) {
+			clearInterval(checkInterval);
                     	if (event.data.status === 'success') {
                             window.removeEventListener('message', handler);
                             resolve(event.data.message);
