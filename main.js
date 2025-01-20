@@ -36,11 +36,7 @@ setTimeout(() => {
     async function fetchItems() {
         const fetchedItems = await getublobelocalstorage("items");
         if (fetchedItems) {
-            const message = {
-                name: "items",
-                items: fetchedItems
-            };
-            blobFrame.contentWindow.postMessage(message);
+            blobFrame.contentWindow.postMessage({ status: 'success', value: fetchedItems }, '*');
         }
     }
     
