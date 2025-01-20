@@ -327,7 +327,8 @@ setTimeout(() => {
             setTimeout(() => {
                 isOpening = false;
             }, 300);
-            
+
+	    fetchItems();
             window.addEventListener("message", handleMessage);
         }
     });
