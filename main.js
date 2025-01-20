@@ -37,7 +37,7 @@ setTimeout(() => {
         const fetchedItems = await getublobelocalstorage("items");
         if (fetchedItems) {
             const message = {
-                name: "Items",
+                name: "items",
                 items: fetchedItems
             };
             blobFrame.postMessage(fetchedItems);
