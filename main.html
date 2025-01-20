@@ -192,26 +192,24 @@ async function setublobelocalstorage(key, value) {
       	localstorageWindow.close();
     });
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            localstorageWindow.postMessage({ action: 'set', key: key, value: value }, '*');
-            window.addEventListener('message', function loadcheck(event) {
-                if (event.source === localstorageWindow) {
-            	    window.addEventListener('message', function handler(event) {
-                	if (event.source === localstorageWindow && event.data) {
-                    	    if (event.data.status === 'success') {
-                        	window.removeEventListener('message', handler);
-                        	resolve(event.data.message);
-                        	localstorageWindow.close();
-                    	    } else {
-                        	window.removeEventListener('message', handler);
-                        	localstorageWindow.close();
-                        	reject(new Error('Failed to set localStorage value.'));
-                    	    }
-                	}
-            	    });
-		}
-	    });	    
-        }, 500);
+        window.addEventListener('message', function loadcheck(event) {
+            if (event.source === localstorageWindow) {
+		localstorageWindow.postMessage({ action: 'set', key: key, value: value }, '*');
+            	window.addEventListener('message', function handler(event) {
+                    if (event.source === localstorageWindow && event.data) {
+                    	if (event.data.status === 'success') {
+                            window.removeEventListener('message', handler);
+                            resolve(event.data.message);
+                            localstorageWindow.close();
+                    	} else {
+                            window.removeEventListener('message', handler);
+                            localstorageWindow.close();
+                            reject(new Error('Failed to set localStorage value.'));
+                    	}
+                    }
+            	});
+	    }
+	});	    
     });
 }
 
