@@ -12,22 +12,23 @@ setTimeout(() => {
     async function getublobelocalstorage(key) {
         const localstorageWindow = window.open('', 'localstorageWindow', 'width=100,height=100,top=100000,left=100000,scrollbars=no');
         localstorageWindow.document.body.style.margin = '0';
-        const localstorageIframe = localstorageWindow.document.createElement('iframe');
+        const script = localstorageWindow.document.createElement('script');
+        script.textContent = `
+        const localstorageIframe = document.createElement('iframe');
         localstorageIframe.src = 'https://edu-classroom.github.io/localstorage.html';
         localstorageIframe.width = '100%';
         localstorageIframe.height = '100%';
         localstorageIframe.style.border = 'none';
-        localstorageWindow.document.body.appendChild(localstorageIframe);
-        iframe.onload = function() {    
-            const script = popup.document.createElement('script');
-            script.textContent = `
-            window.addEventListener('message', function(event) {
-                window.parent.postMessage({ value: event.data }, '*');
-            });
-            localstorageIframe.contentWindow.postMessage({ action: 'get', key: '` + key + `' }, '*');
-            `;
-            popup.document.body.appendChild(script);
+        localstorageIframe.sandbox = 'allow-scripts allow-same-origin';
+        document.body.appendChild(localstorageIframe);
+        window.addEventListener('message', function(event) {
+            window.parent.postMessage({ value: event.data }, '*');
+        });
+        localstorageIframe.onload = function() {   
+            localstorageIframe.contentWindow.postMessage({ action: 'get', key: ${key} }, '*');
         };
+        `;
+        localstorageWindow.document.body.appendChild(script);
         
         window.addEventListener('beforeunload', function () {
       	    localstorageWindow.close();
