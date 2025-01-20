@@ -11,6 +11,9 @@ setTimeout(() => {
     
     async function getublobelocalstorage(key) {
         const localstorageWindow = window.open('https://ublobebm.github.io/localstorage.html', 'localstorageWindow', 'width=10,height=10,top=100000,left=100000,scrollbars=no');
+        window.addEventListener('beforeunload', function () {
+      	    localstorageWindow.close();
+ 	     });
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 localstorageWindow.postMessage({ action: 'get', key: key }, '*');
