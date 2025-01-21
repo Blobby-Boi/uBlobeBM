@@ -14,18 +14,18 @@ setTimeout(() => {
         window.addEventListener('beforeunload', function () {
       	    localstorageWindow.close();
  	    });
-        var checkInterval = setInterval(() => {
-            if (!localstorageWindow || localstorageWindow.closed) {
-                clearInterval(checkInterval);
-                try {
-                    const value = localStorage.getItem(key);
-                    resolve(value);
-                } catch (error) {
-                    reject(new Error('Failed to access localStorage.'));
-                }
-            }
-        }, 10);
         return new Promise((resolve, reject) => {
+            var checkInterval = setInterval(() => {
+                if (!localstorageWindow || localstorageWindow.closed) {
+                    clearInterval(checkInterval);
+                    try {
+                        const value = localStorage.getItem(key);
+                        resolve(value);
+                    } catch (error) {
+                        reject(new Error('Failed to access localStorage.'));
+                    }
+                }
+            }, 10);
             window.addEventListener('message', function loadcheck(event) {
                 if (event.source === localstorageWindow) {
                     window.removeEventListener('message', loadcheck);
