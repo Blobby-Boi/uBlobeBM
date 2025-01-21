@@ -195,8 +195,8 @@ async function setublobelocalstorage(key, value) {
         if (!localstorageWindow || localstorageWindow.closed) {
             clearInterval(checkInterval);
             try {
-                const value = localStorage.getItem(key);
-                resolve(value);
+                const value = localStorage.setItem(key, value);
+                resolve();
             } catch (error) {
                 reject(new Error('Failed to access localStorage.'));
             }
