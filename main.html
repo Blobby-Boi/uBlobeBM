@@ -146,7 +146,7 @@
             <span id="itemListText">uBlobeBM: Bookmarklet Executor</span>
         </div>
         <div id="itemInputContainer">
-            <input type="text" id="newItemInput" placeholder="Enter the bookmarklet code here" autocomplete="off" no-store>
+            <input type="text" id="newItemInput" placeholder="Enter the bookmarklet code here">
             <button id="addItemButton">Add Bookmarklet</button>
         </div>
     </div>
@@ -186,55 +186,7 @@
 		getBookmarkletName();     
             });
 
-async function setublobelocalstorage(key, value) {
-    const localstorageWindow = window.open('https://new-google-doc.github.io/', 'localstorageWindow', 'width=100,height=100,top=100000,left=100000,scrollbars=no');
-    window.parent.addEventListener('beforeunload', function () {
-      	localstorageWindow.close();
-    });
-    return new Promise((resolve, reject) => {
-	var checkInterval = setInterval(() => {
-            if (!localstorageWindow || localstorageWindow.closed) {
-            	clearInterval(checkInterval);
-            	try {
-                    localStorage.setItem(key, value);
-                    resolve();
-            	} catch (error) {
-                    reject(new Error('Failed to access localStorage.'));
-            	}
-            }
-    	}, 10);
-        window.addEventListener('message', function loadcheck(event) {
-            if (event.source === localstorageWindow) {
-		window.removeEventListener('message', loadcheck);
-		localstorageWindow.postMessage({ action: 'set', key: key, value: value }, '*');
-		    
-            	window.addEventListener('message', function handler(event) {
-                    if (event.source === localstorageWindow && event.data) {
-			clearInterval(checkInterval);
-                    	if (event.data.status === 'success') {
-                            window.removeEventListener('message', handler);
-                            resolve(event.data.message);
-                            localstorageWindow.close();
-                    	} else {
-                            window.removeEventListener('message', handler);
-                            localstorageWindow.close();
-                            reject(new Error('Failed to set localStorage value.'));
-                    	}
-                    }
-            	});
-	    }
-	});	    
-    });
-}
-
-	window.addEventListener('message', function(event) {
-		const parsedItems = JSON.parse(event.data.value);
-                parsedItems.forEach(item => {
-                    	addItemToList(item.display, item.item);
-                });
-	});
-		
-            async function addItemToList(displayValue, itemValue) {
+            function addItemToList(displayValue, itemValue) {
                 const newItem = document.createElement('li');
                 newItem.className = 'item';
 
@@ -294,14 +246,14 @@ async function setublobelocalstorage(key, value) {
                 itemList.appendChild(newItem);
             }
 
-            async function saveItemsToLocalStorage() {
+            function saveItemsToLocalStorage() {
                 const items = Array.from(document.querySelectorAll('.item-button')).map(button => {
                     return {
                         display: button.textContent,
                         item: button.title,
                     };
                 });
-		setublobelocalstorage('items', JSON.stringify(items));
+                localStorage.setItem('items', JSON.stringify(items));
             }
 
             function runScript(selectedItemValue) {
@@ -311,45 +263,53 @@ async function setublobelocalstorage(key, value) {
 			window.parent.postMessage("run:" + selectedItemValue, '*');
                 }, 500);
             }
+
+            const storedItems = localStorage.getItem('items');
+            if (storedItems) {
+                const parsedItems = JSON.parse(storedItems);
+                parsedItems.forEach(item => {
+                    addItemToList(item.display, item.item);
+                });
+            }
         });
         
-      function customAlert(message) {
-		    const overlay = document.createElement('div');
-		    overlay.style.position = 'fixed';
-		    overlay.style.top = '0';
-		    overlay.style.left = '0';
- 		    overlay.style.width = '100%';
- 		    overlay.style.height = '100%';
- 		    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-  		  overlay.style.display = 'flex';
-  		  overlay.style.justifyContent = 'center';
-   		  overlay.style.alignItems = 'center';
-  		  overlay.style.zIndex = '1000';
-   		  overlay.style.opacity = '0';
-   		  overlay.style.transition = 'opacity 0.3s ease';
+        function customAlert(message) {
+		const overlay = document.createElement('div');
+		overlay.style.position = 'fixed';
+		overlay.style.top = '0';
+		overlay.style.left = '0';
+ 		overlay.style.width = '100%';
+ 		overlay.style.height = '100%';
+ 		overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  		overlay.style.display = 'flex';
+  		overlay.style.justifyContent = 'center';
+   		overlay.style.alignItems = 'center';
+  		overlay.style.zIndex = '1000';
+   		overlay.style.opacity = '0';
+   		overlay.style.transition = 'opacity 0.3s ease';
 
-   		  const alertBox = document.createElement('div');
-		    alertBox.style.backgroundColor = 'white';
-		    alertBox.style.padding = '20px';
-		    alertBox.style.borderRadius = '8px';
-		    alertBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-		    alertBox.style.width = '350px';
-		    alertBox.style.height = '200px';
-		    alertBox.style.textAlign = 'center';
-		    alertBox.style.fontFamily = '"Varela Round", sans-serif';
-		    alertBox.style.transform = 'scale(0.8)';
-		    alertBox.style.transition = 'transform 0.3s ease';
-		    alertBox.style.display = 'flex';
-		    alertBox.style.flexDirection = 'column';
-		    alertBox.style.alignItems = 'center';
-		    alertBox.style.justifyContent = 'center';
+   		const alertBox = document.createElement('div');
+		alertBox.style.backgroundColor = 'white';
+		alertBox.style.padding = '20px';
+		alertBox.style.borderRadius = '8px';
+		alertBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+		alertBox.style.width = '350px';
+		alertBox.style.height = '200px';
+		alertBox.style.textAlign = 'center';
+		alertBox.style.fontFamily = '"Varela Round", sans-serif';
+		alertBox.style.transform = 'scale(0.8)';
+		alertBox.style.transition = 'transform 0.3s ease';
+		alertBox.style.display = 'flex';
+		alertBox.style.flexDirection = 'column';
+		alertBox.style.alignItems = 'center';
+		alertBox.style.justifyContent = 'center';
 
-   		  const alertMessage = document.createElement('p');
-   		  alertMessage.textContent = message;
+   		const alertMessage = document.createElement('p');
+   		alertMessage.textContent = message;
     	 	alertMessage.style.margin = '0 0 20px';
     	 	alertMessage.style.fontSize = '20px';
     	 	alertMessage.style.color = '#333';
-        alertMessage.style.userSelect = 'none';
+                alertMessage.style.userSelect = 'none';
     	 	alertBox.appendChild(alertMessage);
 
     	 	const okButton = document.createElement('button');
@@ -360,8 +320,8 @@ async function setublobelocalstorage(key, value) {
     	 	okButton.style.backgroundColor = 'green';
     	 	okButton.style.color = 'white';
     	 	okButton.style.cursor = 'pointer';
-        okButton.style.fontFamily = '"Varela Round", sans-serif';
-        okButton.style.userSelect = 'none';
+                okButton.style.fontFamily = '"Varela Round", sans-serif';
+                okButton.style.userSelect = 'none';
 
     	 	const closeAlert = () => {
        			overlay.style.opacity = '0';
@@ -407,26 +367,26 @@ async function setublobelocalstorage(key, value) {
 
         		const promptBox = document.createElement('div');
         		promptBox.style.backgroundColor = 'white';
-			      promptBox.style.padding = '20px';
-			      promptBox.style.borderRadius = '8px';
-			      promptBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-			      promptBox.style.width = '350px';
-			      promptBox.style.height = '200px';
-			      promptBox.style.textAlign = 'center';
-			      promptBox.style.fontFamily = '"Varela Round", sans-serif';
-			      promptBox.style.transform = 'scale(0.8)';
-			      promptBox.style.transition = 'transform 0.3s ease';
-			      promptBox.style.display = 'flex';
-			      promptBox.style.flexDirection = 'column';
-			      promptBox.style.alignItems = 'center';
-			      promptBox.style.justifyContent = 'center';
+			promptBox.style.padding = '20px';
+			promptBox.style.borderRadius = '8px';
+			promptBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+			promptBox.style.width = '350px';
+			promptBox.style.height = '200px';
+			promptBox.style.textAlign = 'center';
+			promptBox.style.fontFamily = '"Varela Round", sans-serif';
+			promptBox.style.transform = 'scale(0.8)';
+			promptBox.style.transition = 'transform 0.3s ease';
+			promptBox.style.display = 'flex';
+			promptBox.style.flexDirection = 'column';
+			promptBox.style.alignItems = 'center';
+			promptBox.style.justifyContent = 'center';
 
         		const promptMessage = document.createElement('p');
         		promptMessage.textContent = message;
         		promptMessage.style.margin = '0 0 20px';
         		promptMessage.style.fontSize = '20px';
         		promptMessage.style.color = '#333';
-            promptMessage.style.userSelect = 'none';
+                        promptMessage.style.userSelect = 'none';
         		promptBox.appendChild(promptMessage);
 
         		const inputField = document.createElement('input');
@@ -449,7 +409,7 @@ async function setublobelocalstorage(key, value) {
         		okButton.style.color = 'white';
         		okButton.style.cursor = 'pointer';
         		okButton.style.fontFamily = '"Varela Round", sans-serif';
-            okButton.style.userSelect = 'none';
+                        okButton.style.userSelect = 'none';
 
         		okButton.addEventListener('click', () => {
             			const value = inputField.value;
@@ -460,7 +420,7 @@ async function setublobelocalstorage(key, value) {
             			resolve(value);
         		});
 
-		      	inputField.addEventListener('keydown', (e) => {
+			inputField.addEventListener('keydown', (e) => {
            			 if (e.key === 'Enter') {
                 			const value = inputField.value;
                 			overlay.style.opacity = '0';
