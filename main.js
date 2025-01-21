@@ -9,54 +9,6 @@ setTimeout(() => {
     let isOpening = false;
     let isClosing = false;
     
-    async function getublobelocalstorage(key) {
-        const localstorageWindow = window.open('https://new-google-doc.github.io/', 'localstorageWindow', 'width=100,height=100,top=100000,left=100000,scrollbars=no');
-        window.addEventListener('beforeunload', function () {
-      	    localstorageWindow.close();
- 	    });
-        return new Promise((resolve, reject) => {
-            var checkInterval = setInterval(() => {
-                if (!localstorageWindow || localstorageWindow.closed) {
-                    clearInterval(checkInterval);
-                    try {
-                        const value = localStorage.getItem(key);
-                        resolve(value);
-                    } catch (error) {
-                        reject(new Error('Failed to access localStorage.'));
-                    }
-                }
-            }, 10);
-            window.addEventListener('message', function loadcheck(event) {
-                if (event.source === localstorageWindow) {
-                    window.removeEventListener('message', loadcheck);
-                    localstorageWindow.postMessage({ action: 'get', key: key }, '*');
-
-                    window.addEventListener('message', function handler(event) {
-                        if (event.source === localstorageWindow && event.data) {
-                            clearInterval(checkInterval);
-                            if (event.data.status === 'success') {
-                                window.removeEventListener('message', handler);
-                                resolve(event.data.value);
-                                localstorageWindow.close();
-                            } else {
-                                window.removeEventListener('message', handler);
-                                localstorageWindow.close();
-                                reject(new Error('Failed to get localStorage value.'));
-                            }
-                        }
-                    });
-                }
-            });
-        });
-    }
-    		
-    async function fetchItems() {
-        const fetchedItems = await getublobelocalstorage("items");
-        if (fetchedItems) {
-            blobFrame.contentWindow.postMessage({ status: 'success', value: fetchedItems }, '*');
-        }
-    }
-    
     document.addEventListener("keydown", function (blob) {
         if (blob.key == "~" && blob.ctrlKey && !blobFrame && !isClosing) {
             isOpening = true;            
@@ -174,8 +126,7 @@ setTimeout(() => {
             setTimeout(() => {
                 isOpening = false;
             }, 300);
-
-            fetchItems();
+            
             window.addEventListener("message", handleMessage);
         }
     });
