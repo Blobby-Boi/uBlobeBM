@@ -46,6 +46,7 @@ setTimeout(() => {
                 position: absolute;
                 top: 40px;
                 display: block;
+                user-select: none;
             `;
 
             fetch("https://raw.githubusercontent.com/Blobby-Boi/uBlobeBM/refs/heads/main/main.html")
