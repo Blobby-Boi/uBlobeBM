@@ -33,6 +33,8 @@ setTimeout(() => {
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
+                margin: 0px 0px;
+                padding: 0px 0px;
             `;
 
             blobFrame = document.createElement("iframe");
@@ -65,6 +67,9 @@ setTimeout(() => {
                 border-top-right-radius: 8px;
                 user-select: none;
                 cursor: move;
+                margin: 0px 0px;
+                padding: 0px 0px;
+                border-radius: 0;
             `;
 
             const closeButton = document.createElement("button");
@@ -105,6 +110,10 @@ setTimeout(() => {
                 font-size: 16px;
                 font-family: 'Varela Round', sans-serif;
                 user-select: none;
+                margin: 0px 0px;
+                padding: 0px 0px;
+                background-color: transparent;
+                text-align: center;
             `;
 
             bar.appendChild(titleText);
