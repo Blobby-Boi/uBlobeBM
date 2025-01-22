@@ -1,10 +1,10 @@
 /// blob.js
 var backupAlert = window.alert;
 document.addEventListener('DOMContentLoaded', function () {
-    if (window.location.hostname.endsWith('.google.com') && window.location.hostname !== 'www.google.com') {
+    if (window.location.hostname.endsWith('.google.com') && window.location.hostname !== 'www.google.com' || window.location.hostname == 'www.youtube.com') {
         window.addEventListener('keydown', function (event) {
             if (event.ctrlKey && event.which === 192) {
-                window.alert("uBlobeBM failed to load on this page! Reason: Google Subdomain");
+                window.alert("uBlobeBM failed to load on this page! Error: Google Subdomain");
             }
         });
         return;
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             if (event.ctrlKey && event.which === 192) {
                                 var newAlert = window.alert;
                                 window.alert = backupAlert;
-                                alert("uBlobeBM failed to load on this page! Reason: Blocked by Content Security Policy");
+                                alert("uBlobeBM failed to load on this page! Error: Blocked by Content Security Policy");
                                 window.alert = newAlert;
                             }
                         });
