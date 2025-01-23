@@ -1,15 +1,15 @@
 /// blob.js
 var backupAlert = window.alert;
 document.addEventListener('DOMContentLoaded', function () {
+    if (window.self !== window.top && document.title === "uBlobeBM") {
+        return;
+    }
     if ((window.location.hostname.endsWith('.google.com') && window.location.hostname !== 'www.google.com') || window.location.hostname == 'www.youtube.com') {
         window.addEventListener('keydown', function (event) {
             if (event.ctrlKey && event.which === 192) {
                 window.alert("uBlobeBM failed to load on this page! Error: Google Subdomain");
             }
         });
-        return;
-    }
-    if (window.self !== window.top && document.title === "uBlobeBM") {
         return;
     }
     var main = 'https://blobby-boi.github.io/uBlobeBM/main.js';
