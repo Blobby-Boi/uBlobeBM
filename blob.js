@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(() => {
                     if (window.blobebmLoaded === false) {
                         window.addEventListener('keydown', function (event) {
-                            if (event.ctrlKey && event.which === 192) {
+                            if (blob.code == "Backquote" && blob.ctrlKey && blob.shiftKey) {
                                 var newAlert = window.alert;
                                 window.alert = backupAlert;
                                 alert("uBlobeBM failed to load on this page! Error: Blocked by Content Security Policy");
