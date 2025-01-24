@@ -10,7 +10,7 @@ setTimeout(() => {
     let isClosing = false;
     
     document.addEventListener("keydown", function (blob) {
-        if (blob.code == "Backquote" && blob.ctrlKey && !blobFrame && !isClosing) {
+        if (blob.code == "Backquote" && blob.ctrlKey && blob.shiftKey && !blobFrame && !isClosing) {
             isOpening = true;            
             if (blobFrame) {
                 closeWithAnimation(blobFrameContainer);
