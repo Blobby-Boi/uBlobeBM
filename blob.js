@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     if ((window.location.hostname.endsWith('.google.com') && window.location.hostname !== 'www.google.com') || window.location.hostname == 'www.youtube.com') {
         window.addEventListener('keydown', function (event) {
-            if (blob.code == "Backquote" && blob.ctrlKey && blob.shiftKey) {
+            if (event.code == "Backquote" && event.ctrlKey && event.shiftKey) {
                 window.alert("uBlobeBM failed to load on this page! Error: Google Subdomain");
             }
         });
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(() => {
                     if (window.blobebmLoaded === false) {
                         window.addEventListener('keydown', function (event) {
-                            if (blob.code == "Backquote" && blob.ctrlKey && blob.shiftKey) {
+                            if (event.code == "Backquote" && event.ctrlKey && event.shiftKey) {
                                 var newAlert = window.alert;
                                 window.alert = backupAlert;
                                 alert("uBlobeBM failed to load on this page! Error: Blocked by Content Security Policy");
