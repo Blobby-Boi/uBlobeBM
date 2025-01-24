@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     if ((window.location.hostname.endsWith('.google.com') && window.location.hostname !== 'www.google.com') || window.location.hostname == 'www.youtube.com') {
         window.addEventListener('keydown', function (event) {
-            if (event.ctrlKey && event.which === 192) {
+            if (blob.code == "Backquote" && blob.ctrlKey && blob.shiftKey) {
                 window.alert("uBlobeBM failed to load on this page! Error: Google Subdomain");
             }
         });
