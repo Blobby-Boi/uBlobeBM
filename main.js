@@ -127,6 +127,8 @@ setTimeout(() => {
 
             document.body.appendChild(blobFrameContainer);
 
+            blobFrameContainer.offsetHeight;
+
             requestAnimationFrame(() => {
                 blobFrameContainer.style.opacity = "1";
                 blobFrameContainer.style.transform = "translate(-50%, -47%) translateY(0)";
