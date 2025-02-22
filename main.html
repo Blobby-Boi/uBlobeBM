@@ -341,7 +341,9 @@
 
     		alertBox.appendChild(okButton);
     	 	overlay.appendChild(alertBox);
+		alertBox.offsetHeight;
     	 	document.body.appendChild(overlay);
+		overlay.offsetHeight;
 
        	 	setTimeout(() => {
      	 	   	overlay.style.opacity = '1';
@@ -433,7 +435,9 @@
 
         		promptBox.appendChild(okButton);
         		overlay.appendChild(promptBox);
+			promptBox.offsetHeight;
         		document.body.appendChild(overlay);
+			overlay.offsetHeight;
 
         		setTimeout(() => {
             			overlay.style.opacity = '1';
