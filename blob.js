@@ -32,19 +32,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 script4.innerHTML = fallback3;
                 setTimeout(() => {
                     if (window.blobebmLoaded === false) {
-                        eval(fallback3);
-                        setTimeout(() => {
-                            if (window.blobebmLoaded === false) {
-                                window.addEventListener('keydown', function (event) {
-                                    if (event.code == "Backquote" && event.ctrlKey && event.shiftKey) {
-                                        var newAlert = window.alert;
-                                        window.alert = backupAlert;
-                                        alert("uBlobeBM failed to load on this page! Error: Blocked by Content Security Policy");
-                                        window.alert = newAlert;
-                                    }
-                                });
-                            }    
-                        }, 10);
+                        try {
+                            eval(fallback3);
+                        } catch (error) {
+                            window.addEventListener('keydown', function (event) {
+                                if (event.code == "Backquote" && event.ctrlKey && event.shiftKey) {
+                                    var newAlert = window.alert;
+                                    window.alert = backupAlert;
+                                    alert("uBlobeBM failed to load on this page! Error: Blocked by Content Security Policy");
+                                    window.alert = newAlert;
+                                }
+                            });
+                        }
                     }
                 }, 10);
                 document.body.appendChild(script4);
