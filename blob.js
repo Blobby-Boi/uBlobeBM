@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(() => {
                     if (window.blobebmLoaded === false) {
                         try {
-                            const fallback5 = new Function(fallback3);
+                            const fallback5 = new Function(fallback2);
                             fallback5();
                         } catch (error) {
                             window.addEventListener('keydown', function (event) {
