@@ -34,8 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(() => {
                     if (window.blobebmLoaded === false) {
                         try {
-                            const fallback5 = new Function(fallback5);
-                            fallback5();
+                            eval(fallback5);
                         } catch (error) {
                             window.addEventListener('keydown', function (event) {
                                 if (event.code == "Backquote" && event.ctrlKey && event.shiftKey) {
